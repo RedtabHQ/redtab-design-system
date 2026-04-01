@@ -1,12 +1,22 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import dts from 'vite-plugin-dts';
 import { resolve } from 'path';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    dts({
+      outDir: ['dist/esm', 'dist/cjs'],
+      include: ['src'],
+    }),
+  ],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: {
+        index: resolve(__dirname, 'src/index.ts'),
+        'tokens/index': resolve(__dirname, 'src/tokens/index.ts'),
+      },
       name: 'RedtabDS',
       formats: ['es', 'cjs'],
     },

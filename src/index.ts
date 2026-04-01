@@ -1,14 +1,21 @@
 // Design Tokens
-export { colors } from './tokens/colors';
-export { spacing } from './tokens/spacing';
-export { fontSize, fontWeight, lineHeight, typography } from './tokens/typography';
-export { shadows } from './tokens/shadows';
+export {
+  colors,
+  spacing,
+  fontSize,
+  fontWeight,
+  lineHeight,
+  typography,
+  shadows,
+} from './tokens';
 
 // Token Types
-export type { ColorToken } from './tokens/colors';
-export type { SpacingToken } from './tokens/spacing';
-export type { TypographyToken } from './tokens/typography';
-export type { ShadowToken } from './tokens/shadows';
+export type {
+  ColorToken,
+  SpacingToken,
+  TypographyToken,
+  ShadowToken,
+} from './tokens';
 
 // Components (Phase 3+)
 // export * from './components';
