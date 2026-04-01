@@ -46,6 +46,16 @@ export {
   Divider, dividerVariants,
 } from './components';
 
+// Interactive Components
+export {
+  Dialog, DialogTitle, DialogContent, DialogFooter, dialogVariants,
+  Dropdown, DropdownItem,
+  Tooltip, tooltipVariants,
+  Tabs,
+  Toast, toastVariants,
+  Pagination, paginationItemVariants,
+} from './components';
+
 export type {
   ButtonProps,
   InputProps,
@@ -63,10 +73,13 @@ export type {
   GridProps,
   StackProps,
   DividerProps,
+  DialogProps, DialogTitleProps, DialogContentProps, DialogFooterProps,
+  DropdownProps, DropdownItemProps,
+  TooltipProps,
+  TabsProps, TabItem,
+  ToastProps,
+  PaginationProps,
 } from './components';
 
 // Utilities
 export { cn } from './utils';
-
-// Hooks (Phase 5)
-// export * from './hooks';

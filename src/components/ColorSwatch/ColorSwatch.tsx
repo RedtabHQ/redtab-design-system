@@ -6,7 +6,7 @@ export interface ColorSwatchProps {
   children?: ReactNode;
 }
 
-export function ColorSwatch({ name, hex }: ColorSwatchProps): React.JSX.Element {
+export function ColorSwatch({ name, hex }: ColorSwatchProps) {
   return (
     <div className="flex items-center gap-3 p-2">
       <div

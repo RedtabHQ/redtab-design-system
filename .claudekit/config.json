@@ -1,0 +1,7 @@
+{
+  "hooks": {
+    "typecheck-changed": {
+      "command": "npx tsc --noEmit 2>/dev/null | tee /tmp/tsc-errors.txt"
+    }
+  }
+}

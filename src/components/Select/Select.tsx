@@ -23,8 +23,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     // Group options by their group field
     const grouped = options.reduce<Record<string, SelectOption[]>>((acc, opt) => {
       const key = opt.group ?? '__ungrouped__';
-      if (!acc[key]) acc[key] = [];
-      acc[key].push(opt);
+      const bucket = acc[key] ?? [];
+      bucket.push(opt);
+      acc[key] = bucket;
       return acc;
     }, {});
 

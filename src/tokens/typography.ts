@@ -24,15 +24,24 @@ export const lineHeight = {
   relaxed: 1.75,
 } as const;
 
-export const typography = {
-  h1: { fontSize: '60px' as const, fontWeight: 700 as const, lineHeight: 1.2 as const },
-  h2: { fontSize: '48px' as const, fontWeight: 700 as const, lineHeight: 1.2 as const },
-  h3: { fontSize: '36px' as const, fontWeight: 700 as const, lineHeight: 1.2 as const },
-  h4: { fontSize: '30px' as const, fontWeight: 600 as const, lineHeight: 1.2 as const },
-  h5: { fontSize: '24px' as const, fontWeight: 600 as const, lineHeight: 1.2 as const },
-  h6: { fontSize: '20px' as const, fontWeight: 600 as const, lineHeight: 1.2 as const },
-  body: { fontSize: '16px' as const, fontWeight: 400 as const, lineHeight: 1.5 as const },
-  caption: { fontSize: '14px' as const, fontWeight: 400 as const, lineHeight: 1.5 as const },
-} as const;
+export const typography: {
+  h1: { fontSize: string; fontWeight: number; lineHeight: number };
+  h2: { fontSize: string; fontWeight: number; lineHeight: number };
+  h3: { fontSize: string; fontWeight: number; lineHeight: number };
+  h4: { fontSize: string; fontWeight: number; lineHeight: number };
+  h5: { fontSize: string; fontWeight: number; lineHeight: number };
+  h6: { fontSize: string; fontWeight: number; lineHeight: number };
+  body: { fontSize: string; fontWeight: number; lineHeight: number };
+  caption: { fontSize: string; fontWeight: number; lineHeight: number };
+} = {
+  h1: { fontSize: '60px', fontWeight: 700, lineHeight: 1.2 },
+  h2: { fontSize: '48px', fontWeight: 700, lineHeight: 1.2 },
+  h3: { fontSize: '36px', fontWeight: 700, lineHeight: 1.2 },
+  h4: { fontSize: '30px', fontWeight: 600, lineHeight: 1.2 },
+  h5: { fontSize: '24px', fontWeight: 600, lineHeight: 1.2 },
+  h6: { fontSize: '20px', fontWeight: 600, lineHeight: 1.2 },
+  body: { fontSize: '16px', fontWeight: 400, lineHeight: 1.5 },
+  caption: { fontSize: '14px', fontWeight: 400, lineHeight: 1.5 },
+};
 
 export type TypographyToken = typeof typography;

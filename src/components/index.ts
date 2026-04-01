@@ -45,3 +45,21 @@ export type { StackProps } from './Stack';
 
 export { Divider, dividerVariants } from './Divider';
 export type { DividerProps } from './Divider';
+
+export { Dialog, DialogTitle, DialogContent, DialogFooter, dialogVariants } from './Dialog';
+export type { DialogProps, DialogTitleProps, DialogContentProps, DialogFooterProps } from './Dialog';
+
+export { Dropdown, DropdownItem } from './Dropdown';
+export type { DropdownProps, DropdownItemProps } from './Dropdown';
+
+export { Tooltip, tooltipVariants } from './Tooltip';
+export type { TooltipProps } from './Tooltip';
+
+export { Tabs } from './Tabs';
+export type { TabsProps, TabItem } from './Tabs';
+
+export { Toast, toastVariants } from './Toast';
+export type { ToastProps } from './Toast';
+
+export { Pagination, paginationItemVariants } from './Pagination';
+export type { PaginationProps } from './Pagination';
