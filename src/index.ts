@@ -37,7 +37,7 @@ export type {
 } from './components';
 
 // Utilities
-export { cn } from './utils/cn';
+export { cn } from './utils';
 
 // Hooks (Phase 5)
 // export * from './hooks';
