@@ -1,0 +1,62 @@
+{/* DesignTokens.mdx */}
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Getting Started/Design Tokens" />
+
+# Design Tokens
+
+Design tokens are the visual design atoms of the design system. They define colors, spacing, typography, and shadows used throughout all components.
+
+## Colors
+
+### Primary
+
+The primary palette uses sky blue — `primary-500: #0ea5e9`.
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `primary.50` | `#f0f9ff` | Backgrounds, hover states |
+| `primary.500` | `#0ea5e9` | Primary buttons, links |
+| `primary.700` | `#0369a1` | Active states, dark accents |
+| `primary.900` | `#0c4a6e` | Text on light backgrounds |
+
+### Semantic
+
+| Category | 500 Value | Usage |
+|----------|-----------|-------|
+| `success` | `#22c55e` | Confirmations, positive states |
+| `warning` | `#f59e0b` | Warnings, attention needed |
+| `error` | `#ef4444` | Errors, destructive actions |
+| `info` | `#3b82f6` | Informational, links |
+
+## Spacing
+
+Based on 4px increments:
+
+| Token | Value | Tailwind |
+|-------|-------|----------|
+| `1` | `4px` | `p-1`, `m-1` |
+| `2` | `8px` | `p-2`, `m-2` |
+| `4` | `16px` | `p-4`, `m-4` |
+| `8` | `32px` | `p-8`, `m-8` |
+
+## Typography
+
+| Style | Size | Weight | Line Height |
+|-------|------|--------|-------------|
+| `h1` | 60px | Bold (700) | 1.2 |
+| `h2` | 48px | Bold (700) | 1.2 |
+| `h3` | 36px | Bold (700) | 1.2 |
+| `body` | 16px | Normal (400) | 1.5 |
+| `caption` | 14px | Normal (400) | 1.5 |
+
+## Shadows
+
+| Token | Usage |
+|-------|-------|
+| `sm` | Subtle hover states |
+| `base` | Cards, containers |
+| `md` | Elevated elements |
+| `lg` | Dropdowns, modals |
+| `xl` | Tooltips |
+| `2xl` | Heavy overlays |

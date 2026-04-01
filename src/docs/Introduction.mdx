@@ -1,0 +1,43 @@
+{/* Introduction.mdx */}
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Getting Started/Introduction" />
+
+# Redtab Design System
+
+A comprehensive React component library providing reusable UI components, design tokens, and utilities for consistent interfaces across redtab applications.
+
+## Installation
+
+```bash
+npm install @redtab/design-system
+```
+
+## Usage
+
+```tsx
+import { colors, spacing, typography } from '@redtab/design-system';
+// or import tokens directly
+import { colors } from '@redtab/design-system/tokens';
+```
+
+## Design Tokens
+
+The design system is built on a token-first architecture:
+
+- **Colors** — Primary, neutral, and semantic color palettes
+- **Spacing** — 4px-based spacing scale
+- **Typography** — Font sizes, weights, line heights, and predefined styles
+- **Shadows** — 6-level elevation system
+
+All Tailwind CSS utilities are powered by these tokens — no arbitrary values allowed.
+
+## Architecture
+
+```
+@redtab/design-system
+├── tokens/       — Design tokens (colors, spacing, typography, shadows)
+├── components/   — React components
+├── hooks/        — Custom React hooks
+└── utils/        — Utility functions
+```
