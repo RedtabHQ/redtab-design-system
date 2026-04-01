@@ -27,9 +27,6 @@ export function useMediaQuery(query: string): boolean {
 
     const mediaQueryList = window.matchMedia(query);
 
-    // Sync state in case it drifted between render and effect
-    setMatches(mediaQueryList.matches);
-
     const handleChange = (event: MediaQueryListEvent) => {
       setMatches(event.matches);
     };

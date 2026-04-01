@@ -65,7 +65,8 @@ export function createQueryKey<TResource extends string>(resource: TResource) {
  * }
  * ```
  */
-export interface QueryConfig<TData> {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export interface QueryConfig<TData = unknown> {
   /** The query key used by TanStack Query for caching and deduplication */
   queryKey: readonly unknown[];
   /** Whether the query is enabled. Set to `false` to disable automatic fetching. */

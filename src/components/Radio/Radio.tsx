@@ -57,7 +57,7 @@ export interface RadioGroupProps {
 
 export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
   (
-    { name, value, onChange, children, label, error, orientation = 'vertical', className },
+    { name, value: _value, onChange, children, label, error, orientation = 'vertical', className },
     ref,
   ) => {
     return (

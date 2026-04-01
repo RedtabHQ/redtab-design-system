@@ -87,7 +87,7 @@ export function usePagination({
     // Both ellipses: [1, ..., 4, 5, 6, ..., 10]
     const middleRange = range(leftSiblingIndex, rightSiblingIndex);
     return [1, null, ...middleRange, null, totalPages];
-  }, [totalItems, pageSize, currentPage, siblingCount, totalPages]);
+  }, [currentPage, siblingCount, totalPages]);
 
   return {
     pages,
