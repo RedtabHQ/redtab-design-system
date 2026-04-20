@@ -300,7 +300,7 @@ Create src/tokens/index.ts with:
    ```
 
 3. **Purpose:** This barrel export allows consumers to import all tokens from a single location:
-   - `import { colors, spacing, typography, shadows } from '@redtab/design-system/tokens'`
+   - `import { colors, spacing, typography, shadows } from '@redtabcode/design-system/tokens'`
    - Without this, consumers would need to import from individual files
 
 This is a standard pattern for clean, organized libraries.

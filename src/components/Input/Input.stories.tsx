@@ -101,7 +101,7 @@ export const Search: Story = {
 export const Disabled: Story = {
   args: {
     label: 'Account Email',
-    defaultValue: 'admin@redtab.com',
+    defaultValue: 'admin@redtab.xyz',
     disabled: true,
     helperText: 'This field cannot be changed.',
   },

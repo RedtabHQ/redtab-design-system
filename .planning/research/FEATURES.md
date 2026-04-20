@@ -233,4 +233,4 @@ These targets assume lazy-loading in consuming apps via code splitting.
 | 3 (Form) | Form components complete | 10 form-related components |
 | 4 (Modals) | Complex patterns working | Modal, Dropdown, Tabs with keyboard nav |
 | 5 (Quality) | Test coverage | > 80% code coverage |
-| 6 (Publish) | Public package | @redtab/design-system@1.0.0 on npm |
+| 6 (Publish) | Public package | @redtabcode/design-system@1.0.0 on npm |

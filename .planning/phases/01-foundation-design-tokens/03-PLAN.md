@@ -305,14 +305,14 @@ Validate that package.json conditional exports point to correct files:
    ```
 
 3. **Test import resolution (optional, requires test app):**
-   - In a separate directory, create test.mjs: `import * as DS from '@redtab/design-system/dist/esm/index.js'`
+   - In a separate directory, create test.mjs: `import * as DS from '@redtabcode/design-system/dist/esm/index.js'`
    - Run: `node test.mjs` (should not error)
    - This verifies the ESM export works
 
 If exports are incorrect:
 - Check package.json for typos in paths
 - Verify dist/ files exist where exports point
-- Use `npm view @redtab/design-system files` (when published) to verify file list
+- Use `npm view @redtabcode/design-system files` (when published) to verify file list
 
 Note: Full npm package resolution testing happens in Phase 2 when publishing.
 </action>

@@ -29,3 +29,25 @@
 - （必要に応じて追記）
 
 ---
+
+## セッション: 2026-04-20T04:33:23Z
+
+- session_id: `C44C5BF7-C453-427A-BCAD-CEC69B9D5BCD`
+- project: `redtab-design-system`
+- branch: `main`
+- started_at: `2026-04-20T04:32:30Z`
+- ended_at: `2026-04-20T04:33:23Z`
+- duration_minutes: 420
+- changes: 2
+
+### 変更ファイル
+- `package.json`
+- `.github/workflows/publish.yml`
+
+### 重要な変更（important=true）
+- （なし）
+
+### 次回への引き継ぎ（任意）
+- （必要に応じて追記）
+
+---

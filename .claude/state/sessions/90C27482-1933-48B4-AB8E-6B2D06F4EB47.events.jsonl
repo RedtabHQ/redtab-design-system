@@ -11,7 +11,7 @@
 {"id":"event-000011","type":"tool.bash","ts":"2026-04-18T13:47:16Z","state":"initialized","data":{"command":"ls /Users/vuquangthinh/Documents/redtab/docs/RPL/frontend/src/components/ 2>/dev/null | head -40"}}
 {"id":"event-000012","type":"tool.bash","ts":"2026-04-18T13:47:23Z","state":"initialized","data":{"command":"ls /Users/vuquangthinh/Documents/redtab/docs/RPL/frontend/src/components/common/ 2>/dev/null"}}
 {"id":"event-000013","type":"tool.bash","ts":"2026-04-18T13:47:24Z","state":"initialized","data":{"command":"cat package.json | grep -E '"name"|"version"'"}}
-{"id":"event-000014","type":"tool.bash","ts":"2026-04-18T13:47:29Z","state":"initialized","data":{"command":"grep -r "@redtab/design-system" /Users/vuquangthinh/Documents/redtab/docs/RPL/frontend/src 2>/dev/null | head -5"}}
+{"id":"event-000014","type":"tool.bash","ts":"2026-04-18T13:47:29Z","state":"initialized","data":{"command":"grep -r "@redtabcode/design-system" /Users/vuquangthinh/Documents/redtab/docs/RPL/frontend/src 2>/dev/null | head -5"}}
 {"id":"event-000015","type":"tool.bash","ts":"2026-04-18T13:47:30Z","state":"initialized","data":{"command":"cat /Users/vuquangthinh/Documents/redtab/docs/RPL/frontend/package.json | grep -E "redtab|design" 2>/dev/null"}}
 {"id":"event-000016","type":"tool.bash","ts":"2026-04-18T13:47:41Z","state":"initialized","data":{"command":"cat /Users/vuquangthinh/Documents/redtab/docs/RPL/frontend/src/components/common/Button.tsx 2>/dev/null | head -60"}}
 {"id":"event-000017","type":"tool.bash","ts":"2026-04-18T13:47:41Z","state":"initialized","data":{"command":"cat src/components/Button/Button.tsx 2>/dev/null | head -60"}}

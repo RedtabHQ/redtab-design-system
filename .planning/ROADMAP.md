@@ -169,7 +169,7 @@
 4. GitHub Actions workflow publishes package to npm with semantic versioning on new tags
 5. CHANGELOG documents all features, fixes, and breaking changes from v0.x to v1.0.0
 6. Version 1.0.0 release is published to npm with stable API guarantee
-7. All tools (types, exports, APIs) are documented; developers can confidently depend on @redtab/design-system
+7. All tools (types, exports, APIs) are documented; developers can confidently depend on @redtabcode/design-system
 
 **Plans:** TBD
 

@@ -151,7 +151,7 @@ export default defineConfig({
 ### 4. Example package.json (Export Configuration)
 ```json
 {
-  "name": "@redtab/design-system",
+  "name": "@redtabcode/design-system",
   "version": "1.0.0",
   "type": "module",
   "exports": {
@@ -253,7 +253,7 @@ export type ColorToken = typeof colors;
 3. Validate component API stability
 
 ### Phase 2: Public Beta (npm public)
-1. Change to public scope: `@redtab/design-system`
+1. Change to public scope: `@redtabcode/design-system`
 2. Semantic versioning from 1.0.0
 3. Chromatic pipeline for visual regression
 

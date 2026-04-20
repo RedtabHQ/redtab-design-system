@@ -55,7 +55,7 @@ This plan assumes:
 Create package.json in project root with:
 
 1. **Metadata:**
-   - name: "@redtab/design-system"
+   - name: "@redtabcode/design-system"
    - version: "0.1.0"
    - description: "Redtab Design System: React components, design tokens, and utilities"
    - type: "module" (ESM by default)
@@ -88,7 +88,7 @@ Use the exact structure from 01-RESEARCH.md lines 549-619. If any version differ
 </action>
 
 <acceptance_criteria>
-- `grep -q '"name": "@redtab/design-system"' package.json`
+- `grep -q '"name": "@redtabcode/design-system"' package.json`
 - `grep -q '"type": "module"' package.json`
 - `grep -q '"main": "./dist/cjs/index.cjs"' package.json`
 - `grep -q '"module": "./dist/esm/index.js"' package.json`

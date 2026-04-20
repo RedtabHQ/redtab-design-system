@@ -1,5 +1,5 @@
 {
-  "name": "@redtab/design-system",
+  "name": "@redtabcode/design-system",
   "version": "1.0.0",
   "description": "Redtab Design System: React components, design tokens, and utilities",
   "type": "module",
@@ -18,7 +18,8 @@
     "design-tokens"
   ],
   "publishConfig": {
-    "access": "public"
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
   },
   "main": "./dist/cjs/index.cjs",
   "module": "./dist/esm/index.js",

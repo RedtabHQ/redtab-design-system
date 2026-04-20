@@ -547,7 +547,7 @@ npm install -D tsup
 
 ```json
 {
-  "name": "@redtab/design-system",
+  "name": "@redtabcode/design-system",
   "version": "0.1.0",
   "description": "Redtab Design System: React components, design tokens, and utilities",
   "author": "Redtab Team",
@@ -953,10 +953,10 @@ ls -la dist/
 #     └── ...
 
 # Test ESM import
-node -e "import('@redtab/design-system').then(m => console.log(Object.keys(m)))"
+node -e "import('@redtabcode/design-system').then(m => console.log(Object.keys(m)))"
 
 # Test CJS import
-node -e "const m = require('@redtab/design-system'); console.log(Object.keys(m))"
+node -e "const m = require('@redtabcode/design-system'); console.log(Object.keys(m))"
 ```
 
 ---
