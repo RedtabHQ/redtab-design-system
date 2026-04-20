@@ -359,7 +359,7 @@ Mistakes that cause rewrites or major issues.
 - Premature optimization
 
 **Prevention:**
-1. Start with single package: @redtabcode/design-system
+1. Start with single package: @redtabhq/design-system
 2. Only split into monorepo (workspaces) if truly separate concerns:
    - Core components (@redtab/ds-core)
    - Icons (@redtab/ds-icons)

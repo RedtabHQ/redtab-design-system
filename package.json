@@ -1,5 +1,5 @@
 {
-  "name": "@redtabcode/design-system",
+  "name": "@redtabhq/design-system",
   "version": "1.0.0",
   "description": "Redtab Design System: React components, design tokens, and utilities",
   "type": "module",

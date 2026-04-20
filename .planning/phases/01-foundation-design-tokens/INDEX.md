@@ -91,7 +91,7 @@ dist/cjs/                    ← CommonJS build output
 
 ```typescript
 // Developers import tokens from TypeScript
-import { colors, spacing, typography, shadows } from '@redtabcode/design-system/tokens';
+import { colors, spacing, typography, shadows } from '@redtabhq/design-system/tokens';
 
 // Compile-time safe: TypeScript catches mistakes
 const myColor = colors.primary[500];      // ✓ Valid
@@ -209,7 +209,7 @@ export default {
 ## Key File Reference
 
 ### Configuration Files (Wave 1)
-- **package.json** — `@redtabcode/design-system` metadata, ESM/CJS exports, scripts, dependencies
+- **package.json** — `@redtabhq/design-system` metadata, ESM/CJS exports, scripts, dependencies
 - **tsconfig.json** — strict mode, isolatedDeclarations, ES2020 target
 - **vite.config.ts** — library mode, dual outputs, React plugin, external: ['react', 'react-dom']
 - **vitest.config.ts** — jsdom environment, globals enabled, setupFiles: ['./tests/setup.ts']
