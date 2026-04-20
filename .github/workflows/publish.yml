@@ -13,24 +13,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
+      - uses: npm/action-setup@v4
         with:
           version: latest
 
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: pnpm
+          cache: npm
           registry-url: https://npm.pkg.github.com
           scope: "@redtabcode"
 
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm run lint
-      - run: pnpm run type-check
-      - run: pnpm run test:run
-      - run: pnpm run build
+      - run: npm install --frozen-lockfile
+      - run: npm run lint
+      - run: npm run type-check
+      - run: npm run test:run
+      - run: npm run build
 
       - name: Publish to GitHub Packages
-        run: pnpm publish --no-git-checks
+        run: npm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
