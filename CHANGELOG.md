@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.0] - 2026-04-10
+
+### Changed
+- Stabilized the v1 public API surface for components, hooks, utilities, and tokens.
+- Updated CI and Chromatic workflows to run on both `main` and `master` branches.
+
+### Added
+- Unit tests for `Tabs` keyboard/selection behavior.
+- Unit tests for `Pagination` navigation and boundary states.
+- Initial automated accessibility test using `axe-core` for core interactive primitives.
+
+### Quality
+- Local release verification passes: `npm run lint`, `npm run type-check`, `npm run test:run`, and `npm run build`.
+
 ## [0.1.0] - 2026-04-02
 
 ### Added

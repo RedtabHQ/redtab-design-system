@@ -1,0 +1,38 @@
+version: 4
+
+models:
+  opus:
+    model: claude-3-opus
+    temperature: 0.2
+    max_tokens: 3000
+
+  sonnet:
+    model: claude-3-5-sonnet
+    temperature: 0.2
+    max_tokens: 2000
+
+  haiku:
+    model: claude-3-haiku
+    temperature: 0.0
+    max_tokens: 800
+
+rules:
+  - "CONFIG ONLY - no runtime logic allowed"
+  - "STRICT JSON for planner/expander"
+  - "EXECUTOR must output raw value only"
+  - "NO reasoning fields allowed anywhere"
+  - "ALL steps must match GSD IDs"
+
+guards:
+  strip_fields:
+    enabled: true
+    remove:
+      - reasoning
+      - explanation
+      - debug
+      - logs
+      - thoughts
+
+workflow:
+  entrypoint: planner
+  mode: deterministic

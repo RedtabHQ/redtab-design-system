@@ -1,0 +1,32 @@
+version: 3
+
+models:
+  opus:
+    model: claude-3-opus
+    temperature: 0.2
+
+  sonnet:
+    model: claude-3-5-sonnet
+    temperature: 0.2
+
+  haiku:
+    model: claude-3-haiku
+    temperature: 0.0
+
+rules:
+  - "CONFIG ONLY: no runtime logic here"
+  - "NO prompts, NO logs in this layer"
+  - "All outputs must follow schema"
+  - "Executor is deterministic only"
+
+guards:
+  strip_fields:
+    enabled: true
+    remove:
+      - reasoning
+      - explanation
+      - debug
+      - logs
+
+workflow:
+  entrypoint: planner

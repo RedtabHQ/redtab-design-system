@@ -1,0 +1,12 @@
+{
+  "compression": {
+    "short_keys": true,
+    "remove_null_fields": true,
+    "strip_debug": true
+  },
+  "execution": {
+    "batch_size": 3,
+    "max_retry": 1,
+    "fanout": true
+  }
+}

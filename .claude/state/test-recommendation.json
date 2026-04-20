@@ -1,0 +1,7 @@
+{
+  "timestamp": "2026-04-18T14:45:02Z",
+  "changed_file": "src/components/Table/Table.tsx",
+  "test_command": "npm test",
+  "related_test": "",
+  "recommendation": "テストの実行を推奨します"
+}

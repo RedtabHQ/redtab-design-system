@@ -1,0 +1,19 @@
+{
+  "version": "1.0",
+  "updatedAt": "2026-04-18T13:46:42.304Z",
+  "skills": {
+    "progress": {
+      "count": 1,
+      "lastUsed": "2026-04-18T13:46:42.303Z"
+    }
+  },
+  "commands": {},
+  "agents": {},
+  "hooks": {
+    "session-init": {
+      "triggered": 2,
+      "blocked": 0,
+      "lastTriggered": "2026-04-18T13:43:16.193Z"
+    }
+  }
+}
