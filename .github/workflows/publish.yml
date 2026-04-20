@@ -22,7 +22,7 @@ jobs:
           node-version: 20
           cache: pnpm
           registry-url: https://npm.pkg.github.com
-          scope: "@redtab"
+          scope: "@redtabcode"
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm run lint
