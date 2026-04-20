@@ -2,9 +2,9 @@ name: Chromatic
 
 on:
   push:
-    branches: [main, master]
+    branches: [test]
   pull_request:
-    branches: [main, master]
+    branches: [test]
 
 jobs:
   chromatic:
@@ -25,6 +25,6 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           buildScriptName: build-storybook
-          autoAcceptChanges: main,master
+          autoAcceptChanges: test
           exitZeroOnChanges: true
           onlyChanged: true
