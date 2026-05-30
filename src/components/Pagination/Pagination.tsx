@@ -1,250 +1,217 @@
-import { forwardRef, type HTMLAttributes } from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '../../utils/cn';
+import React from 'react';
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react';
+import type { PaginationMeta } from '../../types';
 
-const paginationItemVariants = cva(
-  'inline-flex items-center justify-center rounded border text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1 disabled:pointer-events-none disabled:opacity-40',
-  {
-    variants: {
-      size: {
-        sm: 'h-7 min-w-7 px-2',
-        md: 'h-9 min-w-9 px-2.5',
-        lg: 'h-10 min-w-10 px-3',
-      },
-      active: {
-        true: 'border-primary-600 bg-primary-600 text-white hover:bg-primary-700',
-        false: 'border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50 hover:border-neutral-300',
-      },
-    },
-    defaultVariants: {
-      size: 'md',
-      active: false,
-    },
-  },
-);
+export type { PaginationMeta };
 
-export interface PaginationProps
-  extends Omit<HTMLAttributes<HTMLElement>, 'onChange'>,
-    VariantProps<typeof paginationItemVariants> {
-  /** Current active page (1-indexed) */
-  currentPage: number;
-  /** Total number of pages */
-  totalPages: number;
-  /** Called when the user navigates to a new page */
-  onPageChange: (page: number) => void;
-  /** Number of page buttons shown around the current page */
-  siblingCount?: number;
-  /** Whether to show first/last page buttons */
-  showEdges?: boolean;
+export interface PaginationProps {
+  meta: PaginationMeta;
+  onPageChange?: (page: number) => void;
+  onPageSizeChange?: (pageSize: number) => void;
+  showPageSize?: boolean;
+  pageSizeOptions?: number[];
+  itemsTitle?: string;
 }
 
-function buildPageRange(
-  current: number,
-  total: number,
-  siblings: number,
-): (number | 'ellipsis')[] {
-  const totalShown = siblings * 2 + 5; // siblings on each side + current + 2 edges + up to 2 ellipsis
+export const Pagination: React.FC<PaginationProps> = ({
+  meta,
+  onPageChange,
+  onPageSizeChange,
+  showPageSize = true,
+  pageSizeOptions = [5, 10, 20, 30, 50, 100],
+  itemsTitle = 'items',
+}) => {
+  const { page, pageSize, total, totalPages } = meta;
 
-  if (total <= totalShown) {
-    return Array.from({ length: total }, (_, i) => i + 1);
-  }
+  const canGoPrevious = page > 1;
+  const canGoNext = page < totalPages;
 
-  const leftSibling = Math.max(current - siblings, 2);
-  const rightSibling = Math.min(current + siblings, total - 1);
-
-  const showLeftEllipsis = leftSibling > 2;
-  const showRightEllipsis = rightSibling < total - 1;
-
-  const pages: (number | 'ellipsis')[] = [1];
-
-  if (showLeftEllipsis) {
-    pages.push('ellipsis');
-  } else {
-    for (let i = 2; i < leftSibling; i++) {
-      pages.push(i);
+  const handleFirst = () => {
+    if (canGoPrevious) {
+      onPageChange?.(1);
     }
-  }
+  };
 
-  for (let i = leftSibling; i <= rightSibling; i++) {
-    pages.push(i);
-  }
-
-  if (showRightEllipsis) {
-    pages.push('ellipsis');
-  } else {
-    for (let i = rightSibling + 1; i < total; i++) {
-      pages.push(i);
+  const handlePrevious = () => {
+    if (canGoPrevious) {
+      onPageChange?.(page - 1);
     }
+  };
+
+  const handleNext = () => {
+    if (canGoNext) {
+      onPageChange?.(page + 1);
+    }
+  };
+
+  const handleLast = () => {
+    if (canGoNext) {
+      onPageChange?.(totalPages);
+    }
+  };
+
+  const handlePageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newPageSize = parseInt(e.target.value, 10);
+    onPageSizeChange?.(newPageSize);
+  };
+
+  // Generate page numbers to display
+  const getPageNumbers = () => {
+    const pages: (number | string)[] = [];
+    const maxVisible = 7;
+
+    if (totalPages <= maxVisible) {
+      // Show all pages
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      // Show first, last, and pages around current
+      const start = Math.max(2, page - 1);
+      const end = Math.min(totalPages - 1, page + 1);
+
+      pages.push(1);
+
+      if (start > 2) {
+        pages.push('...');
+      }
+
+      for (let i = start; i <= end; i++) {
+        pages.push(i);
+      }
+
+      if (end < totalPages - 1) {
+        pages.push('...');
+      }
+
+      pages.push(totalPages);
+    }
+
+    return pages;
+  };
+
+  const pageNumbers = getPageNumbers();
+
+  // Calculate showing range
+  const startItem = total === 0 ? 0 : (page - 1) * pageSize + 1;
+  const endItem = Math.min(page * pageSize, total);
+
+  if (total === 0) {
+    return null;
   }
 
-  pages.push(total);
-  return pages;
-}
+  return (
+    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-4 py-3 bg-white border-t border-gray-200">
+      {/* Results info and page size selector */}
+      <div className="flex flex-col sm:flex-row items-center gap-4 text-sm text-gray-700">
+        <p className="text-sm text-gray-500">
+          Showing <span className="font-bold">{startItem}</span> to{' '}
+          <span className="font-bold">{endItem}</span> of{' '}
+          <span className="font-bold">{total}</span> {itemsTitle}
+        </p>
 
-export const Pagination = forwardRef<HTMLElement, PaginationProps>(
-  (
-    {
-      className,
-      size = 'md',
-      currentPage,
-      totalPages,
-      onPageChange,
-      siblingCount = 1,
-      showEdges = false,
-      ...props
-    },
-    ref,
-  ) => {
-    if (totalPages <= 1) return null;
-
-    const pages = buildPageRange(currentPage, totalPages, siblingCount);
-    const canPrev = currentPage > 1;
-    const canNext = currentPage < totalPages;
-
-    const itemCls = (active: boolean): string =>
-      paginationItemVariants({ size, active });
-
-    return (
-      <nav
-        ref={ref}
-        role="navigation"
-        aria-label="Pagination"
-        className={cn('flex items-center gap-1', className)}
-        {...props}
-      >
-        {/* First page */}
-        {showEdges && (
-          <button
-            type="button"
-            aria-label="First page"
-            disabled={!canPrev}
-            onClick={() => { onPageChange(1); }}
-            className={itemCls(false)}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
+        {showPageSize && onPageSizeChange && (
+          <div className="flex items-center gap-2">
+            <label htmlFor="pageSize" className="text-sm text-gray-700">
+              Per page:
+            </label>
+            <select
+              id="pageSize"
+              value={pageSize}
+              onChange={handlePageSizeChange}
+              className="input w-20"
             >
-              <polyline points="11 17 6 12 11 7" />
-              <polyline points="18 17 13 12 18 7" />
-            </svg>
-          </button>
+              {pageSizeOptions.map((size) => (
+                <option key={size} value={size}>
+                  {size}
+                </option>
+              ))}
+            </select>
+          </div>
         )}
+      </div>
 
-        {/* Previous */}
-        <button
-          type="button"
-          aria-label="Previous page"
-          disabled={!canPrev}
-          onClick={() => { onPageChange(currentPage - 1); }}
-          className={itemCls(false)}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <polyline points="15 18 9 12 15 6" />
-          </svg>
-        </button>
-
-        {/* Page numbers */}
-        {pages.map((page, index) => {
-          if (page === 'ellipsis') {
-            return (
-              <span
-                key={`ellipsis-${index}`}
-                aria-hidden="true"
-                className="inline-flex items-center justify-center text-neutral-400 select-none px-1"
-              >
-                &hellip;
-              </span>
-            );
-          }
-          return (
-            <button
-              key={page}
-              type="button"
-              aria-label={`Page ${page}`}
-              aria-current={page === currentPage ? 'page' : undefined}
-              onClick={() => { onPageChange(page); }}
-              className={itemCls(page === currentPage)}
-            >
-              {page}
-            </button>
-          );
-        })}
-
-        {/* Next */}
-        <button
-          type="button"
-          aria-label="Next page"
-          disabled={!canNext}
-          onClick={() => { onPageChange(currentPage + 1); }}
-          className={itemCls(false)}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <polyline points="9 18 15 12 9 6" />
-          </svg>
-        </button>
-
-        {/* Last page */}
-        {showEdges && (
+      {/* Pagination controls */}
+      {meta.totalPages <= 1 ? null : (
+        <div className="flex items-center gap-1">
+          {/* First page */}
           <button
-            type="button"
-            aria-label="Last page"
-            disabled={!canNext}
-            onClick={() => { onPageChange(totalPages); }}
-            className={itemCls(false)}
+            onClick={handleFirst}
+            disabled={!canGoPrevious}
+            title="First page"
+            className="px-3 py-2 text-sm font-semibold border border-gray-200 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <polyline points="13 17 18 12 13 7" />
-              <polyline points="6 17 11 12 6 7" />
-            </svg>
+            <ChevronsLeft className="h-4 w-4" />
           </button>
-        )}
-      </nav>
-    );
-  },
-);
 
-Pagination.displayName = 'Pagination';
+          {/* Previous page */}
+          <button
+            onClick={handlePrevious}
+            disabled={!canGoPrevious}
+            title="Previous page"
+            className="px-3 py-2 text-sm font-semibold border border-gray-200 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+
+          {/* Page numbers */}
+          <div className="hidden sm:flex items-center gap-1">
+            {pageNumbers.map((pageNum, idx) => {
+              if (pageNum === '...') {
+                return (
+                  <span key={`ellipsis-${idx}`} className="px-2 py-1 text-gray-500">
+                    ...
+                  </span>
+                );
+              }
+
+              return (
+                <button
+                  key={pageNum}
+                  onClick={() => onPageChange?.(pageNum as number)}
+                  className={`px-3 py-1.5 text-sm font-semibold rounded-lg cursor-pointer ${
+                    page === pageNum
+                      ? 'bg-redtab text-white'
+                      : 'border border-gray-200 hover:bg-gray-50'
+                    }`}
+                >
+                  {pageNum}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Mobile: Show current page */}
+          <div className="sm:hidden flex items-center gap-2 px-3 py-1 text-sm text-gray-700">
+            <span>
+              Page {page} of {totalPages}
+            </span>
+          </div>
+
+          {/* Next page */}
+          <button
+            onClick={handleNext}
+            disabled={!canGoNext}
+            title="Next page"
+            className="px-3 py-2 text-sm font-semibold border border-gray-200 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
+
+          {/* Last page */}
+          <button
+            onClick={handleLast}
+            disabled={!canGoNext}
+            title="Last page"
+            className="px-3 py-2 text-sm font-semibold border border-gray-200 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+          >
+            <ChevronsRight className="h-4 w-4" />
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
 
 export { paginationItemVariants };

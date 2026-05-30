@@ -39,3 +39,13 @@ export type RequiredKeys<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K
  * type InputRef = ComponentRef<'input'> // → HTMLInputElement
  */
 export type ComponentRef<T extends React.ElementType> = React.ComponentRef<T>;
+
+/**
+ * Pagination metadata
+ */
+export type PaginationMeta = {
+  page: number;
+  pageSize: number;
+  total: number;
+  totalPages: number;
+};

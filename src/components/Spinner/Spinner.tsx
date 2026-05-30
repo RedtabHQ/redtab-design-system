@@ -40,3 +40,32 @@ export function Spinner({ className, variant, size, label, ...props }: SpinnerPr
     </div>
   );
 }
+
+type InlineSpinnerSize = 'sm' | 'md' | 'lg' | 'xl';
+type InlineSpinnerVariant = 'primary' | 'secondary' | 'white';
+
+const inlineSizeClasses: Record<InlineSpinnerSize, string> = {
+  sm: 'w-3 h-3 border',
+  md: 'w-4 h-4 border-2',
+  lg: 'w-5 h-5 border-2',
+  xl: 'w-6 h-6 border-2',
+};
+
+const inlineVariantClasses: Record<InlineSpinnerVariant, string> = {
+  primary: 'border-redtab border-t-transparent',
+  secondary: 'border-gray-500 border-t-transparent',
+  white: 'border-white border-t-transparent',
+};
+
+export function InlineSpinner({ size = 'md', variant = 'white', className = '' }: {
+  size?: InlineSpinnerSize;
+  variant?: InlineSpinnerVariant;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`inline-block rounded-full animate-spin ${inlineSizeClasses[size]} ${inlineVariantClasses[variant]} ${className}`}
+      aria-label="Loading"
+    />
+  );
+}
