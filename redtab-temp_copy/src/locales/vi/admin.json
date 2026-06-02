@@ -1,0 +1,57 @@
+{
+  "title": "Cài đặt quản trị",
+  "settings": "Cài đặt",
+  "manageSettings": "Quản lý cài đặt tài khoản và tùy chọn của bạn",
+  "notifications": {
+    "title": "Thông báo",
+    "description": "Cấu hình cách bạn nhận thông báo",
+    "email": "Thông báo email",
+    "emailDesc": "Nhận cập nhật qua email",
+    "push": "Thông báo đẩy",
+    "pushDesc": "Thông báo trên trình duyệt",
+    "sms": "Thông báo SMS",
+    "smsDesc": "Nhận cập nhật qua SMS"
+  },
+  "privacy": {
+    "title": "Bảo mật & Quyền riêng tư",
+    "description": "Kiểm soát cài đặt quyền riêng tư",
+    "profileVisibility": "Hiển thị hồ sơ",
+    "profileVisibilityDesc": "Cho phép người khác xem hồ sơ của bạn",
+    "activityVisibility": "Hiển thị hoạt động",
+    "activityVisibilityDesc": "Hiển thị trạng thái hoạt động của bạn",
+    "twoFactor": "Xác thực hai yếu tố",
+    "twoFactorDesc": "Thêm một lớp bảo mật bổ sung"
+  },
+  "appearance": {
+    "title": "Giao diện",
+    "description": "Tùy chỉnh giao diện",
+    "lightMode": "Chế độ sáng",
+    "darkMode": "Chế độ tối",
+    "systemDefault": "Mặc định hệ thống"
+  },
+  "language": {
+    "title": "Ngôn ngữ",
+    "description": "Chọn ngôn ngữ ưa thích",
+    "selectLanguage": "Chọn ngôn ngữ"
+  },
+  "scoring": {
+    "title": "Công cụ chấm điểm",
+    "description": "Cấu hình các thông số chấm điểm tín dụng",
+    "weights": "Trọng số điểm",
+    "thresholds": "Ngưỡng",
+    "rules": "Quy tắc chấm điểm"
+  },
+  "policy": {
+    "title": "Công cụ chính sách",
+    "description": "Quản lý chính sách cho vay",
+    "deployPolicies": "Triển khai chính sách",
+    "deploying": "Đang triển khai...",
+    "tiers": "Hạng tín dụng",
+    "limits": "Giới hạn",
+    "pricing": "Định giá & Logic quyết định"
+  },
+  "regional": {
+    "title": "Điều khiển khu vực",
+    "description": "Quản lý cài đặt và hạn chế theo khu vực"
+  }
+}

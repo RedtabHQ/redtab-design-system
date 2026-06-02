@@ -4,7 +4,9 @@ import { Search, Menu } from 'lucide-react';
 import { UserDropdown } from '../UserDropdown';
 import { MarketSegmentSwitcher } from './MarketSegmentSwitcher';
 
-export const Header: React.FC = () => {
+export interface HeaderProps {}
+
+export const Header: React.FC<HeaderProps> = () => {
   const { t } = useTranslation('common');
 
   return (
@@ -50,4 +52,3 @@ export const Header: React.FC = () => {
     </>
   );
 };
-

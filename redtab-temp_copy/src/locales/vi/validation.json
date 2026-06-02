@@ -1,0 +1,36 @@
+{
+  "required": "Trường này là bắt buộc",
+  "email": {
+    "required": "Vui lòng nhập email",
+    "invalid": "Vui lòng nhập địa chỉ email hợp lệ"
+  },
+  "password": {
+    "required": "Vui lòng nhập mật khẩu",
+    "minLength": "Mật khẩu phải có ít nhất {{count}} ký tự"
+  },
+  "minLength": "Phải có ít nhất {{min}} ký tự",
+  "maxLength": "Không được vượt quá {{max}} ký tự",
+  "min": "Phải lớn hơn hoặc bằng {{min}}",
+  "max": "Phải nhỏ hơn hoặc bằng {{max}}",
+  "number": "Vui lòng nhập số hợp lệ",
+  "integer": "Vui lòng nhập số nguyên",
+  "positive": "Phải là số dương",
+  "negative": "Phải là số âm",
+  "url": "Vui lòng nhập URL hợp lệ",
+  "phone": "Vui lòng nhập số điện thoại hợp lệ",
+  "date": "Vui lòng nhập ngày hợp lệ",
+  "dateRange": "Ngày kết thúc phải sau ngày bắt đầu",
+  "futureDate": "Ngày phải trong tương lai",
+  "pastDate": "Ngày phải trong quá khứ",
+  "pattern": "Vui lòng nhập đúng định dạng yêu cầu",
+  "unique": "Giá trị này đã tồn tại",
+  "match": "Giá trị không khớp",
+  "invalid": "Giá trị không hợp lệ",
+  "invalidFormat": "Định dạng không hợp lệ",
+  "selectOption": "Vui lòng chọn một tùy chọn",
+  "fileRequired": "Vui lòng tải lên tệp",
+  "fileSize": "Kích thước tệp phải nhỏ hơn {{size}}",
+  "fileType": "Loại tệp không hợp lệ. Cho phép: {{types}}",
+  "passwordStrength": "Mật khẩu quá yếu",
+  "confirmPassword": "Mật khẩu xác nhận phải khớp"
+}

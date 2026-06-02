@@ -1,0 +1,46 @@
+{
+  "session_id": "A13C876A-36C3-4C6A-88BC-3B50400F96A8",
+  "parent_session_id": null,
+  "state": "stopped",
+  "state_version": 1,
+  "started_at": "2026-05-29T21:40:17Z",
+  "updated_at": "2026-05-29T21:41:50Z",
+  "resume_token": "214CE700-B77C-44CE-879D-23F36EFDB5BC",
+  "event_seq": 8,
+  "last_event_id": "event-000008",
+  "fork_count": 0,
+  "orchestration": {
+    "max_state_retries": 3,
+    "retry_backoff_seconds": 10
+  },
+  "cwd": "/Users/vuquangthinh/Documents/redtab/projects/redtab-design-system",
+  "project_name": "redtab-design-system",
+  "prompt_seq": 1,
+  "git": {
+    "branch": "main",
+    "uncommitted_changes": 40,
+    "last_commit": "a61734c"
+  },
+  "plans": {
+    "exists": false,
+    "last_modified": 0,
+    "wip_tasks": 0,
+    "todo_tasks": 0,
+    "pending_tasks": 0,
+    "completed_tasks": 0
+  },
+  "changes_this_session": [
+    {
+      "file": "DESIGN.md",
+      "action": "Write",
+      "timestamp": "2026-05-29T21:41:45Z",
+      "important": false
+    }
+  ],
+  "intent": "literal",
+  "last_message_length": 220,
+  "last_message_hash": "4f4a5c8c6c2f53fa",
+  "ended_at": "2026-05-29T21:41:50Z",
+  "duration_minutes": 421,
+  "memory_logged": true
+}

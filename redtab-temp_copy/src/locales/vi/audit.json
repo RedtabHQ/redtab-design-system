@@ -1,0 +1,33 @@
+{
+  "title": "Nhật ký kiểm tra",
+  "auditLog": "Nhật ký kiểm tra",
+  "allActivity": "Tất cả hoạt động",
+  "filterByType": "Lọc theo loại",
+  "filterByUser": "Lọc theo người dùng",
+  "filterByDate": "Lọc theo ngày",
+  "action": "Hành động",
+  "user": "Người dùng",
+  "timestamp": "Thời gian",
+  "details": "Chi tiết",
+  "ipAddress": "Địa chỉ IP",
+  "userAgent": "User Agent",
+  "resource": "Tài nguyên",
+  "resourceId": "Mã tài nguyên",
+  "oldValue": "Giá trị cũ",
+  "newValue": "Giá trị mới",
+  "actionTypes": {
+    "create": "Tạo",
+    "update": "Cập nhật",
+    "delete": "Xóa",
+    "login": "Đăng nhập",
+    "logout": "Đăng xuất",
+    "approve": "Phê duyệt",
+    "reject": "Từ chối",
+    "export": "Xuất",
+    "import": "Nhập"
+  },
+  "searchPlaceholder": "Tìm nhật ký...",
+  "loadingAuditLogs": "Đang tải nhật ký...",
+  "noLogsFound": "Không tìm thấy nhật ký nào",
+  "exportLogs": "Xuất nhật ký"
+}

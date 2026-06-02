@@ -1,0 +1,51 @@
+{
+  "title": "Developer Portal",
+  "apiKeys": "API Keys",
+  "webhooks": "Webhooks",
+  "documentation": "Documentation",
+  "createApiKey": "Create API Key",
+  "editApiKey": "Edit API Key",
+  "deleteApiKey": "Delete API Key",
+  "apiKey": {
+    "name": "Name",
+    "key": "Key",
+    "secret": "Secret",
+    "permissions": "Permissions",
+    "createdAt": "Created At",
+    "lastUsed": "Last Used",
+    "expiresAt": "Expires At",
+    "status": "Status",
+    "active": "Active",
+    "revoked": "Revoked",
+    "expired": "Expired"
+  },
+  "webhook": {
+    "title": "Webhooks",
+    "createWebhook": "Create Webhook",
+    "editWebhook": "Edit Webhook",
+    "deleteWebhook": "Delete Webhook",
+    "url": "URL",
+    "events": "Events",
+    "secret": "Secret",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "logs": "Webhook Logs",
+    "deliveries": "Deliveries",
+    "retries": "Retries"
+  },
+  "permissions": {
+    "read": "Read",
+    "write": "Write",
+    "delete": "Delete",
+    "admin": "Admin"
+  },
+  "copyToClipboard": "Copy to clipboard",
+  "copied": "Copied!",
+  "revoke": "Revoke",
+  "regenerate": "Regenerate",
+  "warningDeleteKey": "Are you sure you want to delete this API key? This action cannot be undone.",
+  "warningRevokeKey": "Are you sure you want to revoke this API key? Applications using this key will lose access.",
+  "noApiKeys": "No API keys found",
+  "noWebhooks": "No webhooks configured"
+}

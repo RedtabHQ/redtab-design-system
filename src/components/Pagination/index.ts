@@ -1,2 +1,2 @@
-export { Pagination, paginationItemVariants } from './Pagination';
-export type { PaginationProps } from './Pagination';
+export { Pagination } from './Pagination';
+export type { PaginationProps, PaginationMeta } from './Pagination';

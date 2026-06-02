@@ -24,6 +24,10 @@ export default defineConfig({
       external: [
         'react',
         'react-dom',
+        'react-hook-form',
+        'react-i18next',
+        'i18next',
+        'react-router-dom',
         'react/jsx-runtime',
         'clsx',
         'tailwind-merge',

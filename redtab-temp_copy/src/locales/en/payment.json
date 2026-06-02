@@ -1,0 +1,39 @@
+{
+  "title": "Treasury & Liquidity",
+  "payments": "Payments",
+  "transactions": "Transactions",
+  "settlements": "Settlements",
+  "treasury": "Treasury",
+  "liquidity": "Liquidity",
+  "balance": "Balance",
+  "availableBalance": "Available Balance",
+  "pendingBalance": "Pending Balance",
+  "totalBalance": "Total Balance",
+  "inflow": "Inflow",
+  "outflow": "Outflow",
+  "netFlow": "Net Flow",
+  "disbursements": "Disbursements",
+  "repayments": "Repayments",
+  "transaction": {
+    "id": "Transaction ID",
+    "type": "Type",
+    "amount": "Amount",
+    "status": "Status",
+    "date": "Date",
+    "reference": "Reference",
+    "description": "Description"
+  },
+  "status": {
+    "pending": "Pending",
+    "completed": "Completed",
+    "failed": "Failed",
+    "processing": "Processing",
+    "cancelled": "Cancelled"
+  },
+  "operationalTrace": "Operational Trace",
+  "entityContext": "Entity Context",
+  "settlementValue": "Settlement Value",
+  "searchPlaceholder": "Search transactions...",
+  "loadingTransactions": "Loading transactions...",
+  "noTransactionsFound": "No transactions found"
+}

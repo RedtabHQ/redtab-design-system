@@ -11,7 +11,9 @@ interface LoginFormInputs {
   rememberMe?: boolean;
 }
 
-export const AuthPage = () => {
+export interface AuthPageProps {}
+
+export const AuthPage: React.FC<AuthPageProps> = () => {
   const { t } = useTranslation('auth');
   const { t: tValidation } = useTranslation('validation');
   const [showPassword, setShowPassword] = useState(false);

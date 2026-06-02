@@ -1,0 +1,51 @@
+{
+  "title": "विकासकर्ता पोर्टल",
+  "apiKeys": "API कुञ्जीहरू",
+  "webhooks": "Webhooks",
+  "documentation": "कागजात",
+  "createApiKey": "API कुञ्जी सिर्जना गर्नुहोस्",
+  "editApiKey": "API कुञ्जी सम्पादन गर्नुहोस्",
+  "deleteApiKey": "API कुञ्जी हटाउनुहोस्",
+  "apiKey": {
+    "name": "नाम",
+    "key": "कुञ्जी",
+    "secret": "गोप्य",
+    "permissions": "अनुमतिहरू",
+    "createdAt": "सिर्जना मिति",
+    "lastUsed": "अन्तिम प्रयोग",
+    "expiresAt": "म्याद सकिने मिति",
+    "status": "स्थिति",
+    "active": "सक्रिय",
+    "revoked": "रद्द गरिएको",
+    "expired": "म्याद सकिएको"
+  },
+  "webhook": {
+    "title": "Webhooks",
+    "createWebhook": "Webhook सिर्जना गर्नुहोस्",
+    "editWebhook": "Webhook सम्पादन गर्नुहोस्",
+    "deleteWebhook": "Webhook हटाउनुहोस्",
+    "url": "URL",
+    "events": "घटनाहरू",
+    "secret": "गोप्य",
+    "status": "स्थिति",
+    "active": "सक्रिय",
+    "inactive": "निष्क्रिय",
+    "logs": "Webhook लगहरू",
+    "deliveries": "डेलिभरीहरू",
+    "retries": "पुन: प्रयासहरू"
+  },
+  "permissions": {
+    "read": "पढ्नुहोस्",
+    "write": "लेख्नुहोस्",
+    "delete": "हटाउनुहोस्",
+    "admin": "प्रशासक"
+  },
+  "copyToClipboard": "क्लिपबोर्डमा कपी गर्नुहोस्",
+  "copied": "कपी गरियो!",
+  "revoke": "रद्द गर्नुहोस्",
+  "regenerate": "पुन: उत्पादन गर्नुहोस्",
+  "warningDeleteKey": "के तपाईं यो API कुञ्जी हटाउन निश्चित हुनुहुन्छ? यो कार्य पूर्ववत गर्न सकिँदैन।",
+  "warningRevokeKey": "के तपाईं यो API कुञ्जी रद्द गर्न निश्चित हुनुहुन्छ? यो कुञ्जी प्रयोग गरिरहेका अनुप्रयोगहरूले पहुँच गुमाउनेछन्।",
+  "noApiKeys": "कुनै API कुञ्जी भेटिएन",
+  "noWebhooks": "कुनै webhook कन्फिगर गरिएको छैन"
+}

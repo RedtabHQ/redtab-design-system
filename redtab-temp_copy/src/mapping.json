@@ -1,0 +1,87 @@
+{
+  "contracts": {
+    "components": [
+      "contracts/*",
+      "DecisioningWorkbench/*"
+    ],
+    "views": [
+      "ContractListView",
+      "ContractDetailView"
+    ]
+  },
+  "suppliers": {
+    "components": [
+      "supplier/*",
+      "SupplierCard",
+      "SupplierSelector",
+      "SupplierDetailComponent"
+    ],
+    "views": [
+      "SupplierDetailView",
+      "SupplierDirectoryView"
+    ]
+  },
+  "merchants": {
+    "components": [
+      "MerchantCard",
+      "MerchantSelector",
+      "MerchantDetailComponent"
+    ],
+    "views": [
+      "MerchantListView",
+      "MerchantDetailView",
+      "MerchantOnboardingView",
+      "MerchantPortal"
+    ]
+  },
+  "dashboard": {
+    "views": [
+      "DashboardView"
+    ]
+  },
+  "auth": {
+    "views": [
+      "LoginView",
+      "ForgotPasswordView",
+      "ResetPasswordView",
+      "OnboardingView"
+    ]
+  },
+  "payment": {
+    "views": [
+      "PaymentOrchestrationView"
+    ]
+  },
+  "settlement": {
+    "views": [
+      "SettlementRailsView"
+    ]
+  },
+  "workbench": {
+    "views": [
+      "DecisioningWorkbenchView"
+    ]
+  },
+  "portfolio": {
+    "views": [
+      "PortfolioRiskView"
+    ]
+  },
+  "admin": {
+    "views": [
+      "AdminPanelView",
+      "ScoringEngineView",
+      "PolicyView"
+    ]
+  },
+  "common": {
+    "components": [
+      "Header",
+      "Sidebar",
+      "ui/*",
+      "shared/*",
+      "modals/*",
+      "form/*"
+    ]
+  }
+}

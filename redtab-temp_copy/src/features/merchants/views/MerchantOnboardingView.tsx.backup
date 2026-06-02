@@ -1,0 +1,836 @@
+import React, { useState, useMemo, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useForm, UseFormRegister, FieldErrors } from 'react-hook-form';
+import {
+  Upload, ChevronRight, ChevronLeft, CheckCircle2, FileText, Building2, AlertCircle,
+  TrendingUp, Scale, Zap, PieChart, ShieldCheck, FileSearch, Info
+} from 'lucide-react';
+import { useCreateMerchant } from '../hooks';
+import BusinessCategorySelector from '@/components/BusinessCategorySelector';
+import MarketSegmentSelector from '@/components/MarketSegmentSelector';
+import { useMarketSegment } from '@/contexts/MarketSegmentContext';
+import type { MerchantStatus } from '@types';
+import { useToastContext } from '@/components/common/ToastContainer';
+
+interface OnboardingFormData {
+  // Step 1: Entity
+  name: string;
+  businessName: string;
+  email: string;
+  phone: string;
+  categoryId: string;
+  marketSegmentId: string;
+  contactPerson: string;
+  address?: string;
+  registrationNumber?: string;
+
+  // Step 2: Financial Capacity
+  bankFlows: number;
+  posSales: number;
+  inventoryTurnover: number;
+  profitMargin: number;
+  liquidAssets: number;
+  growthTrend: number;
+
+  // Step 3: Obligations
+  employeeArrears: number;
+  householdDebt: number;
+  outsideLoans: number;
+  rentLease: number;
+  taxDues: number;
+
+  // Step 4: Behavioral
+  tenureMonths: number;
+  refundRate: number;
+  fulfillmentRate: number;
+  socialReputation: number;
+  responsiveness: number;
+
+  // Step 5: Documents
+  panNumber?: string;
+}
+
+const MerchantOnboardingView: React.FC = () => {
+  const navigate = useNavigate();
+  const createMerchant = useCreateMerchant();
+  const { show } = useToastContext();
+  const { selectedSegment, isGlobalView } = useMarketSegment();
+
+  const [step, setStep] = useState(1);
+  const totalSteps = 5;
+  const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set());
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [fileError, setFileError] = useState<string>('');
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    trigger,
+    getValues,
+    watch,
+    setValue,
+  } = useForm<OnboardingFormData>({
+    mode: 'onBlur',
+    resolver: (data) => {
+      const errors: Record<string, { message: string }> = {};
+
+      // Step 1 validation
+      if (!data.name?.trim()) {
+        errors.name = { message: 'Business name is required' };
+      } else if (data.name.trim().length < 3) {
+        errors.name = { message: 'Business name must be at least 3 characters' };
+      } else if (data.name.trim().length > 100) {
+        errors.name = { message: 'Business name cannot exceed 100 characters' };
+      }
+
+      if (!data.categoryId?.trim()) {
+        errors.categoryId = { message: 'Business category is required' };
+      }
+
+      if (!data.marketSegmentId?.trim()) {
+        errors.marketSegmentId = { message: 'Market segment is required' };
+      }
+
+      if (!data.contactPerson?.trim()) {
+        errors.contactPerson = { message: 'Contact person is required' };
+      } else if (data.contactPerson.trim().length < 2) {
+        errors.contactPerson = { message: 'Contact person name must be at least 2 characters' };
+      }
+
+      if (!data.email?.trim()) {
+        errors.email = { message: 'Email address is required' };
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) {
+        errors.email = { message: 'Please enter a valid email address' };
+      }
+
+      if (!data.phone?.trim()) {
+        errors.phone = { message: 'Phone number is required' };
+      } else if (!/^[+\d\s\-()]+$/.test(data.phone.trim())) {
+        errors.phone = { message: 'Please enter a valid phone number' };
+      } else if (data.phone.replace(/\D/g, '').length < 7) {
+        errors.phone = { message: 'Phone number must have at least 7 digits' };
+      }
+
+      // Financial validation
+      if (data.bankFlows < 0) {
+        errors.bankFlows = { message: 'Monthly bank inflow cannot be negative' };
+      } else if (data.bankFlows > 999999999) {
+        errors.bankFlows = { message: 'Monthly bank inflow exceeds maximum limit' };
+      }
+
+      if (data.posSales < 0) {
+        errors.posSales = { message: 'POS sales cannot be negative' };
+      } else if (data.posSales > 999999999) {
+        errors.posSales = { message: 'POS sales exceeds maximum limit' };
+      }
+
+      if (data.profitMargin < 0) {
+        errors.profitMargin = { message: 'Profit margin cannot be negative' };
+      } else if (data.profitMargin > 100) {
+        errors.profitMargin = { message: 'Profit margin cannot exceed 100%' };
+      }
+
+      // Obligations validation
+      if (data.employeeArrears < 0) {
+        errors.employeeArrears = { message: 'Employee arrears cannot be negative' };
+      }
+      if (data.householdDebt < 0) {
+        errors.householdDebt = { message: 'Household debt cannot be negative' };
+      }
+      if (data.outsideLoans < 0) {
+        errors.outsideLoans = { message: 'Outside loans cannot be negative' };
+      }
+      if (data.rentLease < 0) {
+        errors.rentLease = { message: 'Monthly rent/lease cannot be negative' };
+      }
+      if (data.taxDues < 0) {
+        errors.taxDues = { message: 'Tax dues cannot be negative' };
+      }
+
+      // Behavioral validation
+      if (data.tenureMonths < 0) {
+        errors.tenureMonths = { message: 'Months in operation cannot be negative' };
+      } else if (data.tenureMonths > 600) {
+        errors.tenureMonths = { message: 'Months in operation cannot exceed 600' };
+      }
+
+      if (data.refundRate < 0 || data.refundRate > 100) {
+        errors.refundRate = { message: 'Refund rate must be between 0-100%' };
+      }
+
+      if (data.fulfillmentRate < 0 || data.fulfillmentRate > 100) {
+        errors.fulfillmentRate = { message: 'Fulfillment rate must be between 0-100%' };
+      }
+
+      if (data.socialReputation < 0 || data.socialReputation > 100) {
+        errors.socialReputation = { message: 'Social reputation score must be 0-100' };
+      }
+
+      if (data.responsiveness < 0 || data.responsiveness > 100) {
+        errors.responsiveness = { message: 'Responsiveness score must be 0-100' };
+      }
+
+      // Additional numeric field validations for edge cases
+      if (data.inventoryTurnover < 0) {
+        errors.inventoryTurnover = { message: 'Inventory turnover cannot be negative' };
+      } else if (data.inventoryTurnover > 365) {
+        errors.inventoryTurnover = { message: 'Inventory turnover cannot exceed 365 cycles/year' };
+      }
+
+      if (data.liquidAssets < 0) {
+        errors.liquidAssets = { message: 'Liquid assets cannot be negative' };
+      } else if (data.liquidAssets > 999999999) {
+        errors.liquidAssets = { message: 'Liquid assets exceeds maximum limit' };
+      }
+
+      if (data.growthTrend < -100 || data.growthTrend > 500) {
+        errors.growthTrend = { message: 'Growth trend must be between -100% and 500%' };
+      }
+
+      return {
+        values: Object.keys(errors).length === 0 ? data : {},
+        errors,
+      };
+    },
+    defaultValues: {
+      name: '',
+      businessName: '',
+      email: '',
+      phone: '',
+      categoryId: '',
+      marketSegmentId: '',
+      contactPerson: '',
+      address: '',
+      registrationNumber: '',
+      bankFlows: 0,
+      posSales: 0,
+      inventoryTurnover: 12,
+      profitMargin: 15,
+      liquidAssets: 0,
+      growthTrend: 5,
+      employeeArrears: 0,
+      householdDebt: 0,
+      outsideLoans: 0,
+      rentLease: 0,
+      taxDues: 0,
+      tenureMonths: 1,
+      refundRate: 0,
+      fulfillmentRate: 95,
+      socialReputation: 80,
+      responsiveness: 90,
+      panNumber: '',
+    },
+  });
+
+  const formValues = watch();
+
+  // Auto-set marketSegmentId when header market segment is selected (not HQ/Global view)
+  useEffect(() => {
+    if (!isGlobalView && selectedSegment?.id) {
+      setValue('marketSegmentId', selectedSegment.id);
+    }
+  }, [selectedSegment, isGlobalView, setValue]);
+
+  const predictedScore = useMemo(() => {
+    // Calculate capacity score (financial & obligations)
+    let capacityScore = 50;
+    if (formValues.bankFlows > 1000000) capacityScore += 15;
+    else if (formValues.bankFlows > 500000) capacityScore += 10;
+    else if (formValues.bankFlows > 200000) capacityScore += 5;
+
+    if (formValues.liquidAssets > 500000) capacityScore += 10;
+    else if (formValues.liquidAssets > 200000) capacityScore += 5;
+
+    if (formValues.profitMargin > 25) capacityScore += 5;
+    else if (formValues.profitMargin > 15) capacityScore += 3;
+
+    if (formValues.inventoryTurnover > 20) capacityScore += 5;
+    else if (formValues.inventoryTurnover > 12) capacityScore += 3;
+
+    const totalDebt = formValues.employeeArrears + formValues.householdDebt +
+                     formValues.outsideLoans + formValues.taxDues;
+    if (totalDebt > 500000) capacityScore -= 20;
+    else if (totalDebt > 200000) capacityScore -= 10;
+    else if (totalDebt > 100000) capacityScore -= 5;
+
+    if (formValues.employeeArrears > 50000) capacityScore -= 15;
+    else if (formValues.employeeArrears > 20000) capacityScore -= 10;
+
+    if (formValues.taxDues > 20000) capacityScore -= 10;
+
+    capacityScore = Math.min(100, Math.max(0, capacityScore));
+
+    // Calculate intention score (behavioral)
+    let intentionScore = 50;
+    if (formValues.tenureMonths > 60) intentionScore += 15;
+    else if (formValues.tenureMonths > 36) intentionScore += 10;
+    else if (formValues.tenureMonths > 12) intentionScore += 5;
+
+    if (formValues.fulfillmentRate >= 95) intentionScore += 10;
+    else if (formValues.fulfillmentRate >= 90) intentionScore += 5;
+    else if (formValues.fulfillmentRate < 80) intentionScore -= 10;
+
+    if (formValues.refundRate < 2) intentionScore += 10;
+    else if (formValues.refundRate < 5) intentionScore += 5;
+    else if (formValues.refundRate > 10) intentionScore -= 10;
+
+    if (formValues.socialReputation > 90) intentionScore += 10;
+    else if (formValues.socialReputation > 80) intentionScore += 5;
+    else if (formValues.socialReputation < 60) intentionScore -= 10;
+
+    if (formValues.responsiveness > 90) intentionScore += 5;
+    else if (formValues.responsiveness < 70) intentionScore -= 5;
+
+    intentionScore = Math.min(100, Math.max(0, intentionScore));
+
+    // Final score: weighted average
+    return Math.round((capacityScore * 0.5) + (intentionScore * 0.5));
+  }, [formValues]);
+
+  const handleNext = async () => {
+    try {
+      if (step === 1) {
+        // Validate all Step 1 fields
+        const isValid = await trigger([
+          'name',
+          'categoryId',
+          'marketSegmentId',
+          'contactPerson',
+          'email',
+          'phone',
+          'address'
+        ]);
+        if (!isValid) return;
+        setCompletedSteps(prev => new Set(prev).add(1));
+        setStep(2);
+      } else if (step === 2) {
+        // Validate all Step 2 financial fields
+        const isValid = await trigger([
+          'bankFlows',
+          'posSales',
+          'inventoryTurnover',
+          'profitMargin',
+          'liquidAssets',
+          'growthTrend'
+        ]);
+        if (!isValid) return;
+        setCompletedSteps(prev => new Set(prev).add(2));
+        setStep(3);
+      } else if (step === 3) {
+        // Validate all Step 3 obligation fields
+        const isValid = await trigger([
+          'employeeArrears',
+          'householdDebt',
+          'outsideLoans',
+          'rentLease',
+          'taxDues'
+        ]);
+        if (!isValid) return;
+        setCompletedSteps(prev => new Set(prev).add(3));
+        setStep(4);
+      } else if (step === 4) {
+        // Validate all Step 4 behavioral fields
+        const isValid = await trigger([
+          'tenureMonths',
+          'refundRate',
+          'fulfillmentRate',
+          'socialReputation',
+          'responsiveness'
+        ]);
+        if (!isValid) return;
+        setCompletedSteps(prev => new Set(prev).add(4));
+        setStep(5);
+      }
+    } catch (error) {
+      console.error('Navigation validation error:', error);
+      show({
+        type: 'DANGER',
+        title: 'Validation Error',
+        message: 'Please check your inputs and try again',
+      });
+    }
+  };
+
+  const handleBack = () => setStep(prev => Math.max(prev - 1, 1));
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    setFileError('');
+
+    if (file) {
+      const validTypes = ['application/pdf', 'image/png', 'image/jpeg'];
+      if (!validTypes.includes(file.type)) {
+        setFileError('Please upload a PDF, PNG, or JPG file');
+        show({
+          type: 'DANGER',
+          title: 'Invalid File Type',
+          message: 'Please upload a PDF, PNG, or JPG file',
+        });
+        return;
+      }
+      if (file.size > 25 * 1024 * 1024) {
+        setFileError('File size must be less than 25MB');
+        show({
+          type: 'DANGER',
+          title: 'File Too Large',
+          message: 'File size must be less than 25MB',
+        });
+        return;
+      }
+      setUploadedFile(file);
+      show({
+        type: 'SUCCESS',
+        title: 'File Uploaded',
+        message: `${file.name} uploaded successfully`,
+      });
+    }
+  };
+
+  const onSubmitForm = async (data: OnboardingFormData) => {
+    // Validate all steps are completed
+    if (!completedSteps.has(1) || !completedSteps.has(2) || !completedSteps.has(3) || !completedSteps.has(4)) {
+      show({
+        type: 'DANGER',
+        title: 'Incomplete Form',
+        message: 'Please complete all steps before submitting',
+      });
+      setStep(1);
+      return;
+    }
+
+    // Validate KYC documents are uploaded
+    if (!uploadedFile) {
+      show({
+        type: 'DANGER',
+        title: 'Missing Documents',
+        message: 'Please upload KYC documents before proceeding',
+      });
+      setStep(5);
+      return;
+    }
+
+    try {
+      // Prepare merchant data with all form values
+      const merchantData = {
+        name: data.name.trim(),
+        businessName: data.businessName?.trim() || data.name.trim(),
+        email: data.email.trim(),
+        phone: data.phone.trim(),
+        categoryId: data.categoryId,
+        marketSegmentId: data.marketSegmentId,
+        contactPerson: data.contactPerson.trim(),
+        address: data.address?.trim() || '',
+        registrationNumber: data.registrationNumber?.trim() || '',
+        panNumber: data.panNumber?.trim() || '',
+        status: 'PENDING' as MerchantStatus,
+        // Financial data
+        bankFlows: data.bankFlows,
+        posSales: data.posSales,
+        inventoryTurnover: data.inventoryTurnover,
+        profitMargin: data.profitMargin,
+        liquidAssets: data.liquidAssets,
+        growthTrend: data.growthTrend,
+        // Obligations data
+        employeeArrears: data.employeeArrears,
+        householdDebt: data.householdDebt,
+        outsideLoans: data.outsideLoans,
+        rentLease: data.rentLease,
+        taxDues: data.taxDues,
+        // Behavioral data
+        tenureMonths: data.tenureMonths,
+        refundRate: data.refundRate,
+        fulfillmentRate: data.fulfillmentRate,
+        socialReputation: data.socialReputation,
+        responsiveness: data.responsiveness,
+      };
+
+      // Submit form with API
+      createMerchant.mutate(merchantData, {
+        onSuccess: (merchant) => {
+          show({
+            type: 'SUCCESS',
+            title: 'Merchant Onboarded',
+            message: `${merchant.name} has been successfully onboarded. ID: ${merchant.id}`,
+          });
+
+          // Redirect to merchant detail page after 2 seconds
+          setTimeout(() => {
+            navigate(`/merchants/${merchant.id}`);
+          }, 2000);
+        },
+        onError: (error: Error) => {
+          console.error('Merchant onboarding failed:', error);
+          show({
+            type: 'DANGER',
+            title: 'Onboarding Failed',
+            message: error.message || 'Failed to onboard merchant. Please try again.',
+          });
+        },
+      });
+    } catch (error) {
+      console.error('Unexpected error during submission:', error);
+      show({
+        type: 'DANGER',
+        title: 'Submission Error',
+        message: 'An unexpected error occurred. Please try again.',
+      });
+    }
+  };
+
+  return (
+    <div className="max-w-5xl mx-auto pb-20 animate-in fade-in duration-500">
+      {/* Header & Progress Bar */}
+      <div className="mb-12">
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h1 className="text-3xl font-black text-gray-900 tracking-tight">Merchant Onboarding</h1>
+            <p className="text-gray-500 font-medium italic mt-1 text-sm">Global Payment Platform & Business Underwriting</p>
+          </div>
+          <div className="text-right">
+            <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Application Phase</span>
+            <p className="text-xl font-black text-red-600">{step} / {totalSteps}</p>
+          </div>
+        </div>
+
+        <div className="flex gap-2 h-1.5 w-full">
+          {[1, 2, 3, 4, 5].map(i => (
+            <div
+              key={i}
+              className={`flex-1 rounded-full transition-all duration-500 ${
+                step >= i ? 'bg-red-600 shadow-[0_0_10px_rgba(220,38,38,0.3)]' : 'bg-gray-200'
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+
+      <form onSubmit={handleSubmit(onSubmitForm)}>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          {/* Left: Form Content */}
+          <div className="lg:col-span-8 space-y-8">
+            <div className="bg-white p-10 rounded-xl border border-gray-100 shadow-xl shadow-gray-200/50">
+
+              {/* STEP 1: ENTITY PROFILE */}
+              {step === 1 && (
+                <div className="space-y-10 animate-in fade-in slide-in-from-right-4">
+                  <div className="flex items-center gap-4 text-gray-900">
+                    <Building2 size={32} className="text-red-600" />
+                    <h2 className="text-2xl font-black tracking-tight uppercase">Entity Profile</h2>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <StepOneField label="Legal Business Name" field="name" register={register} errors={errors} />
+                    <div className="space-y-2 group">
+                      <BusinessCategorySelector
+                        {...register('categoryId', {
+                          required: 'Business category is required',
+                        })}
+                        error={errors.categoryId?.message}
+                        label="Business Category"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <MarketSegmentSelector
+                        {...register('marketSegmentId', {
+                          required: 'Operational market is required',
+                        })}
+                        label="Operational Market"
+                        error={errors.marketSegmentId?.message}
+                        showCurrency={true}
+                        disabled={!isGlobalView && !!selectedSegment}
+                      />
+                      {!isGlobalView && selectedSegment && (
+                        <p className="text-[10px] text-blue-600 italic px-1">
+                          Auto-selected based on your current market view
+                        </p>
+                      )}
+                    </div>
+                    <StepOneField label="Contact Person" field="contactPerson" register={register} errors={errors} />
+                    <StepOneField label="Email Address" type="email" field="email" register={register} errors={errors} />
+                    <StepOneField label="Phone Number" type="tel" field="phone" register={register} errors={errors} />
+                    <StepOneField label="Business Address" field="address" register={register} errors={errors} />
+                  </div>
+                </div>
+              )}
+
+              {/* STEP 2: FINANCIAL CAPACITY */}
+              {step === 2 && (
+                <div className="space-y-10 animate-in fade-in slide-in-from-right-4">
+                  <div className="flex items-center gap-4 text-gray-900">
+                    <TrendingUp size={32} className="text-red-600" />
+                    <h2 className="text-2xl font-black tracking-tight uppercase">Financial Capacity</h2>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <StepOneField label="Monthly Bank Inflow (USD)" type="number" field="bankFlows" register={register} errors={errors} />
+                    <StepOneField label="Avg Monthly POS Sales (USD)" type="number" field="posSales" register={register} errors={errors} />
+                    <StepOneField label="Inventory Turnover (Cycles/Year)" type="number" field="inventoryTurnover" register={register} errors={errors} />
+                    <StepOneField label="Average Profit Margin (%)" type="number" field="profitMargin" register={register} errors={errors} />
+                    <StepOneField label="Liquid Assets (USD)" type="number" field="liquidAssets" register={register} errors={errors} />
+                    <StepOneField label="Year-over-Year Growth (%)" type="number" field="growthTrend" register={register} errors={errors} />
+                  </div>
+                </div>
+              )}
+
+              {/* STEP 3: OBLIGATIONS */}
+              {step === 3 && (
+                <div className="space-y-10 animate-in fade-in slide-in-from-right-4">
+                  <div className="flex items-center gap-4 text-gray-900">
+                    <Scale size={32} className="text-red-600" />
+                    <h2 className="text-2xl font-black tracking-tight uppercase">Risk Obligations</h2>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <StepOneField label="Employee & Supplier Arrears (USD)" type="number" field="employeeArrears" register={register} errors={errors} />
+                    <StepOneField label="Household / Personal Debt (USD)" type="number" field="householdDebt" register={register} errors={errors} />
+                    <StepOneField label="Other Active Business Loans (USD)" type="number" field="outsideLoans" register={register} errors={errors} />
+                    <StepOneField label="Monthly Rent & Lease Overhead (USD)" type="number" field="rentLease" register={register} errors={errors} />
+                    <StepOneField label="Unpaid Government Tax Dues (USD)" type="number" field="taxDues" register={register} errors={errors} />
+                  </div>
+                </div>
+              )}
+
+              {/* STEP 4: BEHAVIORAL SIGNALS */}
+              {step === 4 && (
+                <div className="space-y-10 animate-in fade-in slide-in-from-right-4">
+                  <div className="flex items-center gap-4 text-gray-900">
+                    <Zap size={32} className="text-red-600" />
+                    <h2 className="text-2xl font-black tracking-tight uppercase">Operational Behavior</h2>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <StepOneField label="Months in Operation" type="number" field="tenureMonths" register={register} errors={errors} />
+                    <StepOneField label="Historical Refund Rate (%)" type="number" field="refundRate" register={register} errors={errors} />
+                    <StepOneField label="Order Fulfillment Rate (%)" type="number" field="fulfillmentRate" register={register} errors={errors} />
+                    <StepOneField label="Social Reputation Score (0-100)" type="number" field="socialReputation" register={register} errors={errors} />
+                    <StepOneField label="Communication Responsiveness (0-100)" type="number" field="responsiveness" register={register} errors={errors} />
+                  </div>
+                </div>
+              )}
+
+              {/* STEP 5: KYC & SUBMISSION */}
+              {step === 5 && (
+                <div className="space-y-10 animate-in fade-in slide-in-from-right-4">
+                  <div className="flex items-center gap-4 text-gray-900">
+                    <ShieldCheck size={32} className="text-green-600" />
+                    <h2 className="text-2xl font-black tracking-tight uppercase">KYC & Compliance Vault</h2>
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-6">
+                    <div className="border-4 border-dashed border-gray-100 rounded-xl p-16 text-center space-y-6 hover:border-red-100 hover:bg-red-50/20 transition-all cursor-pointer group">
+                      <div className="w-20 h-20 bg-gray-50 rounded-lg flex items-center justify-center mx-auto text-gray-400 group-hover:bg-red-600 group-hover:text-white transition-all shadow-inner">
+                        <Upload size={32} />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-black text-gray-900">Upload Registration Dossier</h4>
+                        <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mt-1">PDF, PNG, JPG (MAX 25MB)</p>
+                      </div>
+                      <input
+                        type="file"
+                        className="hidden"
+                        id="kyc-file-upload"
+                        accept=".pdf,.png,.jpg,.jpeg"
+                        onChange={handleFileUpload}
+                      />
+                      <label
+                        htmlFor="kyc-file-upload"
+                        className="inline-block px-8 py-3 bg-gray-900 text-white rounded-2xl text-xs font-black uppercase tracking-widest shadow-lg hover:bg-gray-800 transition-all cursor-pointer"
+                      >
+                        Browse Vault
+                      </label>
+                    </div>
+
+                    {uploadedFile && (
+                      <div className="p-4 bg-green-50 rounded-xl border border-green-100 flex items-center gap-3">
+                        <CheckCircle2 className="text-green-600" size={20} />
+                        <div>
+                          <p className="text-sm font-bold text-green-800">Document uploaded successfully</p>
+                          <p className="text-xs text-green-600">{uploadedFile.name}</p>
+                        </div>
+                      </div>
+                    )}
+
+                    {fileError && (
+                      <div className="p-3 bg-red-50 rounded-xl border border-red-100 flex items-start gap-3">
+                        <AlertCircle className="text-red-600 flex-shrink-0 mt-0.5" size={16} />
+                        <p className="text-sm text-red-600 font-semibold">{fileError}</p>
+                      </div>
+                    )}
+
+                    <div className="p-8 bg-gray-900 rounded-xl text-white space-y-6">
+                      <div className="flex items-center gap-3">
+                        <FileSearch size={24} className="text-red-600" />
+                        <h3 className="font-bold">Automated Integrity Check</h3>
+                      </div>
+                      <p className="text-xs text-gray-400 leading-relaxed font-medium">
+                        By proceeding, the platform will initiate a background check across regulatory databases for <span className="text-white font-black">{getValues('name') || 'the entity'}</span>.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Navigation Controls */}
+              <div className="flex gap-4 mt-12 pt-10 border-t border-gray-50">
+                {step > 1 && (
+                  <button
+                    type="button"
+                    onClick={handleBack}
+                    disabled={isSubmitting}
+                    className="px-8 py-4 border-2 border-gray-100 text-gray-400 rounded-3xl font-black text-xs uppercase tracking-widest flex items-center gap-2 hover:bg-gray-50 transition-all disabled:opacity-50"
+                  >
+                    <ChevronLeft size={18} /> Back
+                  </button>
+                )}
+                <button
+                  type={step === totalSteps ? 'submit' : 'button'}
+                  onClick={step !== totalSteps ? handleNext : undefined}
+                  disabled={isSubmitting || (step === 5 && !uploadedFile)}
+                  className="flex-1 py-4 bg-red-600 text-white rounded-3xl font-black text-sm uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-red-700 transition-all shadow-xl shadow-red-600/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <div className="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                      Creating...
+                    </>
+                  ) : (
+                    <>
+                      {step === totalSteps ? 'Complete Enrollment' : 'Continue Phase'}
+                      {step !== totalSteps && <ChevronRight size={18} />}
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Summary Sidebar */}
+          <div className="lg:col-span-4 space-y-8 lg:sticky lg:top-24">
+            <div className="bg-white p-8 rounded-xl border border-gray-100 shadow-sm space-y-8">
+              <div className="flex items-center gap-3 text-gray-400">
+                <PieChart size={18} />
+                <h3 className="text-[10px] font-black uppercase tracking-widest">Intake Intelligence</h3>
+              </div>
+
+              <div className="space-y-6">
+                <div className="flex justify-between items-end">
+                  <div>
+                    <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none">Predicted Score</p>
+                    <p className="text-4xl font-black text-gray-900 mt-2">{predictedScore}</p>
+                  </div>
+                  <div className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest text-white ${
+                    predictedScore >= 75 ? 'bg-green-500' : 'bg-amber-500'
+                  }`}>
+                    Tier {predictedScore >= 90 ? 'A' : predictedScore >= 75 ? 'B' : 'C'}
+                  </div>
+                </div>
+
+                <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                  <div className="bg-red-600 h-full transition-all duration-1000" style={{ width: `${predictedScore}%` }} />
+                </div>
+              </div>
+
+              <div className="space-y-4 pt-4 border-t border-gray-50">
+                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Captured Inputs</p>
+                <div className="space-y-3">
+                  <SummaryRow label="Entity Data" checked={completedSteps.has(1)} />
+                  <SummaryRow label="Financials" checked={completedSteps.has(2)} />
+                  <SummaryRow label="Liability Profile" checked={completedSteps.has(3)} />
+                  <SummaryRow label="Behavioral Pts" checked={completedSteps.has(4)} />
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gray-900 p-8 rounded-xl text-white space-y-6 shadow-2xl">
+              <div className="flex items-center gap-3">
+                <Zap size={20} className="text-red-600" />
+                <h4 className="font-bold text-sm tracking-tight">Merchant Policy</h4>
+              </div>
+              <p className="text-[11px] text-gray-400 leading-relaxed font-medium">
+                Minimum <span className="text-white font-bold">USD 50,000</span> monthly transaction volume required for <span className="text-white font-bold">Tier A</span> approval. <span className="text-white font-bold">0.95x</span> processing multiplier applies to qualified merchants.
+              </p>
+            </div>
+
+            <div className="p-8 bg-amber-50 rounded-xl border border-amber-100 flex items-start gap-4">
+              <Info size={20} className="text-amber-600 shrink-0" />
+              <p className="text-[10px] text-amber-800 font-medium leading-relaxed italic">
+                All data provided is subject to automated verification with payment networks and regulatory databases. Discrepancies will trigger manual review.
+              </p>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+// Subcomponents
+interface StepOneFieldProps {
+  label: string;
+  field: keyof OnboardingFormData;
+  type?: string;
+  register: UseFormRegister<OnboardingFormData>;
+  errors: FieldErrors<OnboardingFormData>;
+}
+
+const StepOneField = ({ label, field, type = 'text', register, errors }: StepOneFieldProps) => {
+  const placeholders: Record<keyof OnboardingFormData, string> = {
+    name: 'e.g., ABC Trading Company',
+    businessName: 'e.g., ABC Trading Limited',
+    email: 'contact@business.com',
+    phone: '+1 (555) 123-4567',
+    categoryId: 'Select category',
+    marketSegmentId: 'Select market',
+    contactPerson: 'John Doe',
+    address: '123 Business Street, City, Country',
+    registrationNumber: 'REG-2024-001234',
+    bankFlows: '100000',
+    posSales: '50000',
+    inventoryTurnover: '12',
+    profitMargin: '15',
+    liquidAssets: '200000',
+    growthTrend: '5',
+    employeeArrears: '0',
+    householdDebt: '0',
+    outsideLoans: '0',
+    rentLease: '5000',
+    taxDues: '0',
+    tenureMonths: '24',
+    refundRate: '2',
+    fulfillmentRate: '95',
+    socialReputation: '85',
+    responsiveness: '90',
+    panNumber: 'AAAPQ1234A',
+  };
+
+  return (
+    <div className="space-y-2 group">
+      <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest px-1 group-focus-within:text-red-600 transition-colors">
+        {label}
+      </label>
+      <input
+        type={type}
+        placeholder={placeholders[field]}
+        {...register(field)}
+        className={`w-full px-6 py-4 bg-gray-50 border rounded-2xl text-sm font-bold outline-none transition-all shadow-inner placeholder:text-gray-300 ${
+          errors[field]
+            ? 'border-red-300 focus:ring-4 focus:ring-red-50/50'
+            : 'border-gray-100 focus:bg-white focus:border-red-100 focus:ring-4 focus:ring-red-50/50'
+        }`}
+      />
+      {errors[field] && <p className="mt-1 text-xs text-red-600">{errors[field]?.message}</p>}
+    </div>
+  );
+};
+
+const SummaryRow = ({ label, checked }: { label: string; checked: boolean }) => (
+  <div className="flex items-center justify-between">
+    <span className={`text-[11px] font-bold ${checked ? 'text-gray-900' : 'text-gray-400'}`}>{label}</span>
+    <div className={`p-1 rounded-lg ${checked ? 'bg-green-50 text-green-600' : 'bg-gray-50 text-gray-200'}`}>
+      <CheckCircle2 size={12} />
+    </div>
+  </div>
+);
+
+export default MerchantOnboardingView;

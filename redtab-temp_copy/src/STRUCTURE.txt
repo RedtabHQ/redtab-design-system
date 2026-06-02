@@ -1,0 +1,104 @@
+REFACTORED FRONTEND STRUCTURE
+=====================================
+
+src/
+├── components/common/               ✅ Reusable UI components (38+ files)
+│   ├── Header.tsx
+│   ├── Sidebar.tsx
+│   ├── Button, Card, Modal, etc.
+│   └── index.ts
+│
+├── features/                        ✅ Feature-based modules
+│   ├── auth/
+│   │   ├── components/, views/, hooks/, services/
+│   │   └── index.ts
+│   ├── merchants/
+│   ├── suppliers/
+│   ├── contracts/
+│   ├── dashboard/
+│   ├── payment/
+│   ├── settlement/
+│   ├── credit/
+│   ├── workbench/
+│   ├── admin/
+│   ├── users/
+│   ├── audit/
+│   ├── portfolio/
+│   └── communication/
+│
+├── hooks/                           ✅ Global hooks (~10 files)
+│
+├── services/                        ✅ Global services (5-10 files)
+│
+├── stores/                          ✅ Zustand state (13 files)
+│
+├── contexts/                        ✅ React contexts (merged, 2 files)
+│
+├── types/                           ✅ Type definitions
+│
+├── utils/                           ✅ Utility functions
+│
+├── lib/                             ✅ Library setup
+│
+├── docs/                            ✅ Documentation (13 .md files)
+│
+└── (App.tsx, main.tsx, etc.)
+
+IMPROVEMENTS MADE
+=====================================
+✅ Deleted 3 backup files (App_design_backup.tsx, App_new.tsx, store_ts)
+✅ Merged context/ → contexts/ (eliminated duplicate folder)
+✅ Merged contract/ → contracts/detail/ (organized contract sub-components)
+✅ Moved 66 root components to:
+   - components/common/ (38 reusable)
+   - features/*/components/ (feature-specific)
+✅ Organized 39 views into respective features
+✅ Moved 52 hooks to:
+   - features/*/hooks/ (feature-specific)
+   - hooks/ (global)
+✅ Moved 34 services to:
+   - features/*/services/ (feature-specific)
+   - services/ (global)
+✅ Centralized 13 .md files → docs/ folder
+✅ Created index.ts files for all features & folders
+✅ No more cluttered root component folder!
+
+BENEFITS
+=====================================
+🎯 Easier Navigation
+  - All merchant code in features/merchants/
+  - All contract code in features/contracts/
+  - Clear feature boundaries
+
+🔍 Faster Debugging
+  - Find related components, hooks, services in one place
+  - Easier to trace imports
+  - Better code organization
+
+📈 Better Scalability
+  - Easy to add new features
+  - Features can be independent
+  - Clear patterns to follow
+
+📚 Improved Maintainability
+  - Feature-based structure is industry standard
+  - Easier for new developers to understand
+  - Collocated related code
+
+NEXT STEPS
+=====================================
+1. Update import paths in all files
+2. Run npm run build to check for errors
+3. Run npm test to verify everything works
+4. Update tsconfig.json path aliases if needed
+5. Verify no circular dependencies
+
+DOCUMENTATION
+=====================================
+See docs/REFACTOR_STRUCTURE.md for:
+- Complete structure overview
+- Migration guide for imports
+- Common patterns
+- Adding new features
+- Testing structure
+

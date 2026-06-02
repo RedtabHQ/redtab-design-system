@@ -4,7 +4,9 @@ import { PageHeader } from '../PageHeader';
 import { Pagination, type PaginationMeta } from '../Pagination';
 import { Spinner } from '../Spinner';
 
-interface ListPageLayoutProps {
+export type { PaginationMeta } from '../Pagination';
+
+export interface ListPageLayoutProps {
   // Header
   title: string;
   subtitle?: string;

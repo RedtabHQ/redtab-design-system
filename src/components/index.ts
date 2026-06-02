@@ -136,13 +136,13 @@ export type { TabsProps, TabItem } from './Tabs';
 export { Toast, toastVariants } from './Toast';
 export type { ToastProps } from './Toast';
 
-export { Pagination, paginationItemVariants } from './Pagination';
+export { Pagination } from './Pagination';
 export type { PaginationProps } from './Pagination';
 
 export { Skeleton } from './Skeleton';
 export type { SkeletonProps } from './Skeleton';
 
-export { Spinner } from './Spinner';
+export { Spinner, InlineSpinner } from './Spinner';
 export type { SpinnerProps } from './Spinner';
 
 export { Alert } from './Alert';

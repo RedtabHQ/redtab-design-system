@@ -1,0 +1,39 @@
+{
+  "title": "कोष र तरलता",
+  "payments": "भुक्तानीहरू",
+  "transactions": "कारोबारहरू",
+  "settlements": "निपटानहरू",
+  "treasury": "कोष",
+  "liquidity": "तरलता",
+  "balance": "ब्यालेन्स",
+  "availableBalance": "उपलब्ध ब्यालेन्स",
+  "pendingBalance": "पर्खिरहेको ब्यालेन्स",
+  "totalBalance": "कुल ब्यालेन्स",
+  "inflow": "आगमन",
+  "outflow": "बहिर्गमन",
+  "netFlow": "नेट प्रवाह",
+  "disbursements": "वितरण",
+  "repayments": "भुक्तानीहरू",
+  "transaction": {
+    "id": "कारोबार आईडी",
+    "type": "प्रकार",
+    "amount": "रकम",
+    "status": "स्थिति",
+    "date": "मिति",
+    "reference": "सन्दर्भ",
+    "description": "विवरण"
+  },
+  "status": {
+    "pending": "पर्खिरहेको",
+    "completed": "पूरा भयो",
+    "failed": "असफल",
+    "processing": "प्रशोधन हुँदैछ",
+    "cancelled": "रद्द गरियो"
+  },
+  "operationalTrace": "सञ्चालन ट्रेस",
+  "entityContext": "इकाई सन्दर्भ",
+  "settlementValue": "निपटान मूल्य",
+  "searchPlaceholder": "कारोबारहरू खोज्नुहोस्...",
+  "loadingTransactions": "कारोबारहरू लोड हुँदैछ...",
+  "noTransactionsFound": "कुनै कारोबार भेटिएन"
+}

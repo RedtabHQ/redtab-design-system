@@ -15,9 +15,10 @@ import {
   PieChart,
   Globe
 } from 'lucide-react';
-import { ClockIcon } from '../Icons';
 
-export const Sidebar: React.FC = () => {
+export interface SidebarProps {}
+
+export const Sidebar: React.FC<SidebarProps> = () => {
   const location = useLocation();
   const { t } = useTranslation('navigation');
 

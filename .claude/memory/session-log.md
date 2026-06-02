@@ -51,3 +51,24 @@
 - （必要に応じて追記）
 
 ---
+
+## セッション: 2026-05-29T21:41:50Z
+
+- session_id: `A13C876A-36C3-4C6A-88BC-3B50400F96A8`
+- project: `redtab-design-system`
+- branch: `main`
+- started_at: `2026-05-29T21:40:17Z`
+- ended_at: `2026-05-29T21:41:50Z`
+- duration_minutes: 421
+- changes: 1
+
+### 変更ファイル
+- `DESIGN.md`
+
+### 重要な変更（important=true）
+- （なし）
+
+### 次回への引き継ぎ（任意）
+- （必要に応じて追記）
+
+---

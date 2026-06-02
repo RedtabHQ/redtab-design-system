@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Globe, CheckCircle, ChevronDown } from 'lucide-react';
-import { useClickOutside } from '../hooks/useClickOutside';
+import { useClickOutside } from '../../hooks/useClickOutside';
 
 export const MarketSegmentSwitcher: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);

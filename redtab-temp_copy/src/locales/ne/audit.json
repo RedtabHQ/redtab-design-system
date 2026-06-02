@@ -1,0 +1,33 @@
+{
+  "title": "अडिट ट्रेलहरू",
+  "auditLog": "अडिट लग",
+  "allActivity": "सबै गतिविधि",
+  "filterByType": "प्रकारद्वारा फिल्टर",
+  "filterByUser": "प्रयोगकर्ताद्वारा फिल्टर",
+  "filterByDate": "मितिद्वारा फिल्टर",
+  "action": "कार्य",
+  "user": "प्रयोगकर्ता",
+  "timestamp": "समय छाप",
+  "details": "विवरण",
+  "ipAddress": "IP ठेगाना",
+  "userAgent": "User Agent",
+  "resource": "स्रोत",
+  "resourceId": "स्रोत आईडी",
+  "oldValue": "पुरानो मान",
+  "newValue": "नयाँ मान",
+  "actionTypes": {
+    "create": "सिर्जना",
+    "update": "अद्यावधिक",
+    "delete": "हटाउनुहोस्",
+    "login": "लगइन",
+    "logout": "लगआउट",
+    "approve": "स्वीकृत",
+    "reject": "अस्वीकार",
+    "export": "निर्यात",
+    "import": "आयात"
+  },
+  "searchPlaceholder": "अडिट लगहरू खोज्नुहोस्...",
+  "loadingAuditLogs": "अडिट लगहरू लोड हुँदैछ...",
+  "noLogsFound": "कुनै अडिट लग भेटिएन",
+  "exportLogs": "लगहरू निर्यात गर्नुहोस्"
+}

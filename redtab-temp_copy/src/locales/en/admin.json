@@ -1,0 +1,57 @@
+{
+  "title": "Admin Settings",
+  "settings": "Settings",
+  "manageSettings": "Manage your account settings and preferences",
+  "notifications": {
+    "title": "Notifications",
+    "description": "Configure how you receive alerts",
+    "email": "Email Notifications",
+    "emailDesc": "Receive updates via email",
+    "push": "Push Notifications",
+    "pushDesc": "Browser notifications",
+    "sms": "SMS Notifications",
+    "smsDesc": "Receive updates via SMS"
+  },
+  "privacy": {
+    "title": "Privacy & Security",
+    "description": "Control your privacy settings",
+    "profileVisibility": "Profile Visibility",
+    "profileVisibilityDesc": "Make your profile visible to others",
+    "activityVisibility": "Activity Visibility",
+    "activityVisibilityDesc": "Show your activity status",
+    "twoFactor": "Two-Factor Authentication",
+    "twoFactorDesc": "Add an extra layer of security"
+  },
+  "appearance": {
+    "title": "Appearance",
+    "description": "Customize the look and feel",
+    "lightMode": "Light Mode",
+    "darkMode": "Dark Mode",
+    "systemDefault": "System Default"
+  },
+  "language": {
+    "title": "Language",
+    "description": "Choose your preferred language",
+    "selectLanguage": "Select Language"
+  },
+  "scoring": {
+    "title": "Scoring Engine",
+    "description": "Configure credit scoring parameters",
+    "weights": "Score Weights",
+    "thresholds": "Thresholds",
+    "rules": "Scoring Rules"
+  },
+  "policy": {
+    "title": "Policy Engine",
+    "description": "Manage lending policies",
+    "deployPolicies": "Deploy Policies",
+    "deploying": "Deploying...",
+    "tiers": "Credit Tiers",
+    "limits": "Limits",
+    "pricing": "Pricing & Decisioning Logic"
+  },
+  "regional": {
+    "title": "Regional Controls",
+    "description": "Manage regional settings and restrictions"
+  }
+}

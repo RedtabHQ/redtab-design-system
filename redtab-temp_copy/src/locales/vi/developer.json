@@ -1,0 +1,51 @@
+{
+  "title": "Cổng nhà phát triển",
+  "apiKeys": "Khóa API",
+  "webhooks": "Webhooks",
+  "documentation": "Tài liệu",
+  "createApiKey": "Tạo khóa API",
+  "editApiKey": "Sửa khóa API",
+  "deleteApiKey": "Xóa khóa API",
+  "apiKey": {
+    "name": "Tên",
+    "key": "Khóa",
+    "secret": "Bí mật",
+    "permissions": "Quyền",
+    "createdAt": "Ngày tạo",
+    "lastUsed": "Lần sử dụng cuối",
+    "expiresAt": "Ngày hết hạn",
+    "status": "Trạng thái",
+    "active": "Hoạt động",
+    "revoked": "Đã thu hồi",
+    "expired": "Đã hết hạn"
+  },
+  "webhook": {
+    "title": "Webhooks",
+    "createWebhook": "Tạo Webhook",
+    "editWebhook": "Sửa Webhook",
+    "deleteWebhook": "Xóa Webhook",
+    "url": "URL",
+    "events": "Sự kiện",
+    "secret": "Bí mật",
+    "status": "Trạng thái",
+    "active": "Hoạt động",
+    "inactive": "Không hoạt động",
+    "logs": "Nhật ký Webhook",
+    "deliveries": "Gửi",
+    "retries": "Thử lại"
+  },
+  "permissions": {
+    "read": "Đọc",
+    "write": "Ghi",
+    "delete": "Xóa",
+    "admin": "Quản trị"
+  },
+  "copyToClipboard": "Sao chép",
+  "copied": "Đã sao chép!",
+  "revoke": "Thu hồi",
+  "regenerate": "Tạo lại",
+  "warningDeleteKey": "Bạn có chắc muốn xóa khóa API này? Hành động này không thể hoàn tác.",
+  "warningRevokeKey": "Bạn có chắc muốn thu hồi khóa API này? Các ứng dụng đang sử dụng khóa này sẽ mất quyền truy cập.",
+  "noApiKeys": "Không tìm thấy khóa API nào",
+  "noWebhooks": "Chưa cấu hình webhook nào"
+}

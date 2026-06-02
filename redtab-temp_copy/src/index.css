@@ -1,0 +1,223 @@
+@import "tailwindcss";
+
+/* Scan design system dist files so Tailwind generates their utility classes */
+@source "../node_modules/@redtabhq/design-system/dist";
+
+@theme {
+  /* Brand */
+  --color-redtab: #e63946;
+  --color-redtab-dark: #c1121f;
+
+  /* Primary scale (= Redtab brand red) — used by @redtabhq/design-system */
+  --color-primary-50:  #fef2f2;
+  --color-primary-100: #fee2e2;
+  --color-primary-200: #fecaca;
+  --color-primary-300: #fca5a5;
+  --color-primary-400: #f87171;
+  --color-primary-500: #e63946;
+  --color-primary-600: #c1121f;
+  --color-primary-700: #991b1b;
+  --color-primary-800: #7f1d1d;
+  --color-primary-900: #450a0a;
+
+  /* Neutral scale — used by @redtabhq/design-system */
+  --color-neutral-0:   #ffffff;
+  --color-neutral-50:  #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-500: #737373;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #404040;
+  --color-neutral-800: #262626;
+  --color-neutral-900: #171717;
+  --color-neutral-950: #0a0a0a;
+
+  /* Success scale — used by @redtabhq/design-system */
+  --color-success-50:  #f0fdf4;
+  --color-success-100: #dcfce7;
+  --color-success-500: #22c55e;
+  --color-success-700: #15803d;
+  --color-success-900: #14532d;
+
+  /* Warning scale — used by @redtabhq/design-system */
+  --color-warning-50:  #fffbeb;
+  --color-warning-100: #fef3c7;
+  --color-warning-500: #f59e0b;
+  --color-warning-700: #b45309;
+  --color-warning-900: #78350f;
+
+  /* Error scale — used by @redtabhq/design-system */
+  --color-error-50:  #fef2f2;
+  --color-error-100: #fee2e2;
+  --color-error-500: #ef4444;
+  --color-error-700: #b91c1c;
+  --color-error-900: #7f1d1d;
+
+  /* Info scale — used by @redtabhq/design-system */
+  --color-info-50:  #eff6ff;
+  --color-info-100: #dbeafe;
+  --color-info-500: #3b82f6;
+  --color-info-700: #1d4ed8;
+  --color-info-900: #1e3a5f;
+
+  /* Legacy semantic aliases (keep for existing components) */
+  --color-primary: var(--color-primary-500);
+  --color-primary-dark: var(--color-primary-600);
+  --color-success: #16a34a;
+  --color-success-bg: #f0fdf4;
+  --color-success-border: #bbf7d0;
+  --color-warning: #d97706;
+  --color-warning-bg: #fffbeb;
+  --color-warning-border: #fde68a;
+  --color-danger: #dc2626;
+  --color-danger-bg: #fef2f2;
+  --color-danger-border: #fecaca;
+  --color-info: #2563eb;
+  --color-info-bg: #eff6ff;
+  --color-info-border: #bfdbfe;
+
+  /* Neutral — surface/text */
+  --color-surface: #ffffff;
+  --color-surface-muted: #f9fafb;
+  --color-border: #e5e7eb;
+  --color-text: #111827;
+  --color-text-muted: #6b7280;
+  --color-text-subtle: #9ca3af;
+
+  /* Typography — sub-xs scale */
+  --text-3xs: 0.5625rem;   /* 9px  — replaces text-3xs  */
+  --text-2xs: 0.625rem;    /* 10px — replaces text-2xs */
+  --text-xs+: 0.6875rem;   /* 11px — replaces text-xs+ */
+
+  /* Border Radius */
+  --radius-input:   0.5rem;
+  --radius-card:    1rem;
+  --radius-surface: 1.5rem;
+  --radius-badge:   9999px;
+
+  /* Shadows (Elevation) */
+  --shadow-card:  0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-hover: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+  /* Spacing */
+  --spacing-128: 32rem;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+
+  body {
+    @apply bg-white text-gray-900 overflow-x-hidden;
+    /* Safe area support for notched devices */
+    /* padding-left: max(0.5rem, env(safe-area-inset-left));
+    padding-right: max(0.5rem, env(safe-area-inset-right));
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom)); */
+  }
+
+  h1 {
+    @apply text-3xl font-bold tracking-tight;
+  }
+
+  h2 {
+    @apply text-2xl font-bold;
+  }
+
+  h3 {
+    @apply text-lg font-semibold;
+  }
+
+  /* Prevent unintended scrollbars on mobile */
+  main {
+    overflow-x: hidden;
+  }
+
+  /* Touch interaction patterns */
+  button,
+  a,
+  [role="button"] {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Button components */
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 inline-flex items-center justify-center gap-2;
+    /* Ensure buttons are tappable on mobile (min 44px height) */
+    min-height: 44px;
+  }
+
+  .btn-primary {
+    @apply bg-redtab text-white hover:bg-redtab-dark active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-100 text-gray-900 hover:bg-gray-200 active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply text-gray-600 hover:text-gray-900 hover:bg-gray-100;
+  }
+
+  /* Card components */
+  .card {
+    @apply bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow p-4 sm:p-6;
+  }
+
+  /* Input components */
+  .input {
+    @apply w-full px-4 py-2 bg-gray-50 border border-gray-100 rounded-lg text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-redtab focus:border-transparent transition-all;
+    /* Ensure inputs are tappable on mobile */
+    min-height: 44px;
+  }
+
+  /* Badge components */
+  .badge {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold;
+  }
+
+  .badge-success {
+    @apply bg-green-100 text-green-700;
+  }
+
+  .badge-warning {
+    @apply bg-amber-100 text-amber-700;
+  }
+
+  .badge-danger {
+    @apply bg-red-100 text-red-700;
+  }
+
+  .badge-info {
+    @apply bg-blue-100 text-blue-700;
+  }
+
+  /* Responsive container helpers */
+  .container-responsive {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+
+  .gap-responsive {
+    @apply gap-3 sm:gap-4;
+  }
+
+  .p-responsive {
+    @apply p-4 sm:p-6;
+  }
+}

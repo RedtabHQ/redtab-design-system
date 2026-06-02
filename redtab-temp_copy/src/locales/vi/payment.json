@@ -1,0 +1,39 @@
+{
+  "title": "Ngân quỹ & Thanh khoản",
+  "payments": "Thanh toán",
+  "transactions": "Giao dịch",
+  "settlements": "Quyết toán",
+  "treasury": "Ngân quỹ",
+  "liquidity": "Thanh khoản",
+  "balance": "Số dư",
+  "availableBalance": "Số dư khả dụng",
+  "pendingBalance": "Số dư chờ xử lý",
+  "totalBalance": "Tổng số dư",
+  "inflow": "Dòng tiền vào",
+  "outflow": "Dòng tiền ra",
+  "netFlow": "Dòng tiền ròng",
+  "disbursements": "Giải ngân",
+  "repayments": "Hoàn trả",
+  "transaction": {
+    "id": "Mã giao dịch",
+    "type": "Loại",
+    "amount": "Số tiền",
+    "status": "Trạng thái",
+    "date": "Ngày",
+    "reference": "Tham chiếu",
+    "description": "Mô tả"
+  },
+  "status": {
+    "pending": "Chờ xử lý",
+    "completed": "Hoàn thành",
+    "failed": "Thất bại",
+    "processing": "Đang xử lý",
+    "cancelled": "Đã hủy"
+  },
+  "operationalTrace": "Theo dõi vận hành",
+  "entityContext": "Ngữ cảnh thực thể",
+  "settlementValue": "Giá trị quyết toán",
+  "searchPlaceholder": "Tìm giao dịch...",
+  "loadingTransactions": "Đang tải giao dịch...",
+  "noTransactionsFound": "Không tìm thấy giao dịch nào"
+}

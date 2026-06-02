@@ -76,7 +76,7 @@ export {
   Tooltip, tooltipVariants,
   Tabs,
   Toast, toastVariants,
-  Pagination, paginationItemVariants,
+  Pagination,
 } from './components';
 
 // Feedback Components

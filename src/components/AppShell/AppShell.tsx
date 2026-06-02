@@ -2,7 +2,11 @@ import React from 'react';
 import { Sidebar } from '../Sidebar';
 import { Header } from '../Header';
 
-export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+export interface AppShellProps {
+  children: React.ReactNode;
+}
+
+export const AppShell: React.FC<AppShellProps> = ({ children }) => (
   <div className="flex min-h-screen">
     {/* Sidebar: shown via drawer on mobile, normal layout on desktop */}
     <Sidebar />

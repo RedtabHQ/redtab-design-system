@@ -1,19 +1,23 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-04-20T04:32:30.315Z",
+  "updatedAt": "2026-05-30T07:43:01.247Z",
   "skills": {
     "progress": {
       "count": 1,
       "lastUsed": "2026-04-18T13:46:42.303Z"
+    },
+    "caveman-commit": {
+      "count": 1,
+      "lastUsed": "2026-05-30T07:43:01.246Z"
     }
   },
   "commands": {},
   "agents": {},
   "hooks": {
     "session-init": {
-      "triggered": 3,
+      "triggered": 4,
       "blocked": 0,
-      "lastTriggered": "2026-04-20T04:32:30.314Z"
+      "lastTriggered": "2026-05-29T21:40:17.683Z"
     }
   }
 }

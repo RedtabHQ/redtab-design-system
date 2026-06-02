@@ -1,0 +1,33 @@
+{
+  "title": "Audit Trails",
+  "auditLog": "Audit Log",
+  "allActivity": "All Activity",
+  "filterByType": "Filter by Type",
+  "filterByUser": "Filter by User",
+  "filterByDate": "Filter by Date",
+  "action": "Action",
+  "user": "User",
+  "timestamp": "Timestamp",
+  "details": "Details",
+  "ipAddress": "IP Address",
+  "userAgent": "User Agent",
+  "resource": "Resource",
+  "resourceId": "Resource ID",
+  "oldValue": "Old Value",
+  "newValue": "New Value",
+  "actionTypes": {
+    "create": "Create",
+    "update": "Update",
+    "delete": "Delete",
+    "login": "Login",
+    "logout": "Logout",
+    "approve": "Approve",
+    "reject": "Reject",
+    "export": "Export",
+    "import": "Import"
+  },
+  "searchPlaceholder": "Search audit logs...",
+  "loadingAuditLogs": "Loading audit logs...",
+  "noLogsFound": "No audit logs found",
+  "exportLogs": "Export Logs"
+}
